@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git -e \"\")",
+      "Bash(npx create-next-app@latest ra-enterprises-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --no-git)",
+      "Bash(xcopy /E /I /H /Y d:Next.JSra-enterprises-temp* .)",
+      "Bash(robocopy d:/Next.JS/ra-enterprises-temp d:/Next.JS/RA_Enterprises /E /XD node_modules .git)",
+      "Bash(robocopy \"d:\\\\Next.JS\\\\ra-enterprises-temp\" \"d:\\\\Next.JS\\\\RA_Enterprises\" /E /XD node_modules .git)",
+      "Bash(cmd /c \"robocopy \"\"d:\\\\Next.JS\\\\ra-enterprises-temp\"\" \"\"d:\\\\Next.JS\\\\RA_Enterprises\"\" /E /XD node_modules .git\")",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm run build)"
+    ]
+  }
+}
