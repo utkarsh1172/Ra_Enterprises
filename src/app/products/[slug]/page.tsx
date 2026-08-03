@@ -64,12 +64,6 @@ export default async function ProductDetailPage({ params }: Props) {
 
           {/* Image */}
           <div className="relative aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-100 shadow-lg">
-            {/*
-              The onError handler cannot be used in Server Components.
-              Place real product images in /public/images/products/<slug>.jpg
-              and they will render automatically. The emoji placeholder below
-              is shown as a visual fallback layered beneath the image.
-            */}
             <Image
               src={product.image}
               alt={product.name}
@@ -77,14 +71,6 @@ export default async function ProductDetailPage({ params }: Props) {
               className="object-cover"
               priority
             />
-            {/* Fallback */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-              <span className="text-8xl">🌶️</span>
-              <span className="text-xs text-amber-300 mt-3 opacity-60">
-                [ {product.name} image ]
-              </span>
-            </div>
-
             {/* Badges */}
             <div className="absolute top-4 left-4 flex flex-col gap-2">
               {product.featured && (

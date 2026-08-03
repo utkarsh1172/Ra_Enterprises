@@ -33,7 +33,7 @@ export default function Footer() {
         <div>
           <h3 className="text-white text-xl font-bold font-serif mb-3">RA Enterprises</h3>
           <p className="text-sm leading-relaxed text-stone-400">
-            Crafting India's finest spice blends with generations of expertise.
+            Crafting India&apos;s finest spice blends with generations of expertise.
             From farm to your kitchen — pure, honest, and full of flavour.
           </p>
           <div className="mt-4 flex gap-3">

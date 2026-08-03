@@ -10,8 +10,8 @@ export default function FeaturedProducts() {
   const featured = getFeaturedProducts();
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#f8efe0] py-24">
+      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionTitle
           label="Our Range"
           title="Featured Spices & Blends"
@@ -27,7 +27,7 @@ export default function FeaturedProducts() {
         <div className="mt-10 text-center">
           <Link
             href="/products"
-            className="inline-flex items-center gap-2 bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 rounded-full shadow-md transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-full bg-[#542315] px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-amber-950/15 transition-all hover:-translate-y-0.5 hover:bg-[#8d301d]"
           >
             View All Products
             <ArrowRightIcon className="w-4 h-4" />

@@ -1,6 +1,7 @@
 // ── Journey preview section on homepage ──────────────────────
 
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { ArrowRightIcon } from '@/components/layout/Icons';
 
@@ -33,7 +34,7 @@ const steps = [
 
 export default function JourneyPreview() {
   return (
-    <section className="py-20 bg-gradient-to-br from-amber-950 to-red-950 relative overflow-hidden">
+    <section className="relative overflow-hidden bg-[#3a170d] py-24">
       {/* Background decorative dots */}
       <div
         className="absolute inset-0 opacity-5 pointer-events-none"
@@ -43,7 +44,7 @@ export default function JourneyPreview() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <SectionTitle
           label="From Farm to Kitchen"
           title="How We Make Our Masalas"
@@ -51,11 +52,25 @@ export default function JourneyPreview() {
           light
         />
 
+        <div className="relative mb-10 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#2b0f08] shadow-2xl shadow-black/20">
+          <Image
+            src="/images/traditional-spice-prep.jpeg"
+            alt="Traditional masala ingredients being prepared by hand"
+            fill
+            className="object-cover object-center opacity-80"
+          />
+          <div className="h-56 sm:h-72" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#3a170d]/85 via-[#3a170d]/30 to-transparent" />
+          <div className="absolute inset-y-0 left-0 flex max-w-md items-center p-7 sm:p-10">
+            <p className="font-serif text-2xl font-bold leading-tight text-[#fff3d8] sm:text-3xl">Real ingredients, prepared with the care your kitchen deserves.</p>
+          </div>
+        </div>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           {steps.map((s) => (
             <div
               key={s.step}
-              className="relative bg-white/10 backdrop-blur-sm border border-white/10 rounded-2xl p-6 text-white hover:bg-white/15 transition-colors duration-200"
+              className="relative rounded-2xl border border-white/10 bg-white/[0.07] p-6 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/[0.12]"
             >
               {/* Step number */}
               <span className="absolute top-4 right-4 text-4xl font-bold text-white/10 select-none">
@@ -63,8 +78,8 @@ export default function JourneyPreview() {
               </span>
 
               <div className="text-4xl mb-4">{s.icon}</div>
-              <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
-              <p className="text-sm text-amber-200/80 leading-relaxed">{s.desc}</p>
+              <h3 className="mb-2 font-serif text-xl font-bold">{s.title}</h3>
+              <p className="text-sm leading-relaxed text-amber-100/70">{s.desc}</p>
             </div>
           ))}
         </div>
@@ -72,7 +87,7 @@ export default function JourneyPreview() {
         <div className="mt-10 text-center">
           <Link
             href="/journey"
-            className="inline-flex items-center gap-2 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold px-8 py-3 rounded-full transition-all duration-200"
+            className="inline-flex items-center gap-2 rounded-full bg-[#f5a831] px-7 py-3.5 text-sm font-bold text-[#38170e] transition-all hover:-translate-y-0.5 hover:bg-[#ffc45b]"
           >
             See Full Process
             <ArrowRightIcon className="w-4 h-4" />
