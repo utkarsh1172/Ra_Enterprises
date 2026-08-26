@@ -1,7 +1,7 @@
 'use client';
 
 // ============================================================
-// RA Enterprises – Cart Context
+// RA A1 Masale – Cart Context
 // ============================================================
 // Provides global cart state using React Context + useReducer.
 // Persists cart to localStorage so it survives page refreshes.

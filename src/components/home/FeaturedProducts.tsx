@@ -6,8 +6,8 @@ import SectionTitle from '@/components/ui/SectionTitle';
 import ProductCard from '@/components/products/ProductCard';
 import { ArrowRightIcon } from '@/components/layout/Icons';
 
-export default function FeaturedProducts() {
-  const featured = getFeaturedProducts();
+export default async function FeaturedProducts() {
+  const featured = await getFeaturedProducts();
 
   return (
     <section className="bg-[#f8efe0] py-24">

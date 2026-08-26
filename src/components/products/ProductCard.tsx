@@ -32,7 +32,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <span className="mt-3 inline-block rounded-full border border-white/30 bg-white/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] backdrop-blur-sm">{product.unit}</span>
         </div>
         <div className="absolute left-3 top-3 flex flex-col gap-1.5">
-          {product.featured && <span className="rounded-full bg-[#fff4d7] px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-[#8d301d]">Best seller</span>}
+          {product.bestSeller && <span className="rounded-full bg-[#fff4d7] px-2.5 py-1 text-[10px] font-black uppercase tracking-wide text-[#8d301d]">Best seller</span>}
           {!product.inStock && <span className="rounded-full bg-gray-500 px-2 py-0.5 text-xs font-bold text-white">Out of stock</span>}
         </div>
       </div>

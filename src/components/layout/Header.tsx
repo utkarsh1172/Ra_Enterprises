@@ -32,7 +32,7 @@ export default function Header() {
             </div>
             <div className="leading-tight">
               <span className="block font-serif text-lg font-bold text-[#542315]">
-                RA Enterprises
+                RA A1 Masale
               </span>
               <span className="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#b15a2a]">
                 Crafted Masalas

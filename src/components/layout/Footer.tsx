@@ -31,7 +31,7 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <h3 className="text-white text-xl font-bold font-serif mb-3">RA Enterprises</h3>
+          <h3 className="text-white text-xl font-bold font-serif mb-3">RA A1 Masale</h3>
           <p className="text-sm leading-relaxed text-stone-400">
             Crafting India&apos;s finest spice blends with generations of expertise.
             From farm to your kitchen — pure, honest, and full of flavour.
@@ -142,7 +142,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-stone-700 py-5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-stone-500">
-          <span>© {year} RA Enterprises. All rights reserved.</span>
+          <span>© {year} RA A1 Masale. All rights reserved.</span>
           <span>Made with ❤️ for authentic Indian flavours.</span>
         </div>
       </div>

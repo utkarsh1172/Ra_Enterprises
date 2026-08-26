@@ -46,7 +46,7 @@ export default function TestimonialsSection() {
         <SectionTitle
           label="What Our Customers Say"
           title="Loved Across India"
-          subtitle="Real reviews from families who trust RA Enterprises every day."
+          subtitle="Real reviews from families who trust RA A1 Masale every day."
         />
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

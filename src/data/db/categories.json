@@ -1,0 +1,32 @@
+[
+  {
+    "id": "masala-blends",
+    "slug": "masala-blends",
+    "name": "Masala Blends",
+    "description": "Traditional multi-spice blends crafted for authentic regional flavour.",
+    "image": "/images/fresh-masala-bowl.jpeg",
+    "active": true,
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
+  },
+  {
+    "id": "pure-spices",
+    "slug": "pure-spices",
+    "name": "Pure Spices",
+    "description": "Single-ingredient, farm-sourced ground spices with no additives.",
+    "image": "/images/whole-spice-selection.jpeg",
+    "active": false,
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
+  },
+  {
+    "id": "specialty",
+    "slug": "specialty",
+    "name": "Specialty",
+    "description": "Distinct flavour blends for specific dishes and occasions.",
+    "image": "/images/whole-spice-selection.jpeg",
+    "active": false,
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
+  }
+]

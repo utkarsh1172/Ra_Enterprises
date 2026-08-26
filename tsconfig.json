@@ -1,11 +1,4 @@
 {
-   "models": [
-    {
-      "title": "Claude",
-      "provider": "anthropic",
-      "apiKey": "YOUR_API_KEY"
-    }
-  ],
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],

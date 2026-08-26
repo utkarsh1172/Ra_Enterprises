@@ -1,0 +1,10 @@
+[
+  {
+    "id": "admin-1",
+    "email": "info@yourdartexpress.com",
+    "passwordHash": "$2b$10$/s0CTWBSah5IE.DAPBTwfuI4gDKf72yfJQiHtFYVEoKgcKJ.M67sK",
+    "name": "Admin",
+    "createdAt": "2026-08-26T00:00:00.000Z",
+    "updatedAt": "2026-08-26T00:00:00.000Z"
+  }
+]

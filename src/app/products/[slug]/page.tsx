@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { products, getProductBySlug, categoryLabels } from '@/data/products';
+import { getAllProducts, getProductBySlug, getCategoryLabels, getProductsByCategory } from '@/data/products';
 import AddToCartSection from '@/components/products/AddToCartSection';
 import ProductCard from '@/components/products/ProductCard';
 import { CheckIcon, ChevronRightIcon } from '@/components/layout/Icons';
@@ -13,40 +13,98 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
-// Generate static paths for all products
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+// Generate static paths for all products at build time (new products still render on demand)
 export async function generateStaticParams() {
+  const products = await getAllProducts();
   return products.map((p) => ({ slug: p.slug }));
 }
+
+export const dynamicParams = true;
+export const revalidate = 60;
 
 // Dynamic SEO metadata per product
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
   if (!product) return {};
+
+  const title = product.seoTitle || product.name;
+  const description = product.seoDescription || product.description;
+  const canonicalPath = product.canonicalPath || `/products/${product.slug}`;
+
   return {
-    title: product.name,
-    description: product.description,
+    title,
+    description,
+    keywords: product.seoKeywords,
+    alternates: { canonical: canonicalPath },
     openGraph: {
-      title: `${product.name} | RA Enterprises`,
-      description: product.description,
-      images: [{ url: product.image }],
+      title: `${title} | RA A1 Masale`,
+      description,
+      images: [{ url: product.ogImage || product.image }],
     },
   };
 }
 
 export default async function ProductDetailPage({ params }: Props) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) notFound();
 
+  const [categoryLabels, sameCategory] = await Promise.all([
+    getCategoryLabels(),
+    getProductsByCategory(product.category),
+  ]);
+
   // Related products: same category, exclude current
-  const related = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
+  const related = sameCategory.filter((p) => p.id !== product.id).slice(0, 4);
+
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: [`${SITE_URL}${product.image}`],
+    description: product.description,
+    sku: product.sku,
+    brand: { '@type': 'Brand', name: 'RA A1 Masale' },
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'INR',
+      price: product.discountPrice ?? product.price,
+      availability:
+        product.stockStatus === 'in_stock'
+          ? 'https://schema.org/InStock'
+          : product.stockStatus === 'low_stock'
+          ? 'https://schema.org/LimitedAvailability'
+          : 'https://schema.org/OutOfStock',
+      url: `${SITE_URL}/products/${product.slug}`,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/products` },
+      { '@type': 'ListItem', position: 3, name: product.name, item: `${SITE_URL}/products/${product.slug}` },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      {/* Structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+
       {/* Breadcrumb */}
       <div className="bg-white border-b border-amber-100 py-3 px-4">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-sm text-gray-500">
@@ -73,13 +131,18 @@ export default async function ProductDetailPage({ params }: Props) {
             />
             {/* Badges */}
             <div className="absolute top-4 left-4 flex flex-col gap-2">
-              {product.featured && (
+              {product.bestSeller && (
                 <span className="bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                   Best Seller
                 </span>
               )}
+              {product.isNew && (
+                <span className="bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                  New
+                </span>
+              )}
               <span className="bg-white text-amber-700 text-xs font-semibold px-3 py-1 rounded-full border border-amber-200">
-                {categoryLabels[product.category]}
+                {categoryLabels[product.category] ?? product.category}
               </span>
             </div>
           </div>
@@ -121,6 +184,37 @@ export default async function ProductDetailPage({ params }: Props) {
             About this Product
           </h2>
           <p className="text-gray-600 leading-relaxed">{product.longDescription}</p>
+
+          {(product.ingredients?.length || product.benefits?.length || product.usageInstructions) && (
+            <div className="mt-8 grid sm:grid-cols-2 gap-8">
+              {product.ingredients && product.ingredients.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold uppercase tracking-wide text-stone-700 mb-2">Ingredients</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{product.ingredients.join(', ')}</p>
+                </div>
+              )}
+              {product.benefits && product.benefits.length > 0 && (
+                <div>
+                  <h3 className="text-sm font-bold uppercase tracking-wide text-stone-700 mb-2">Benefits</h3>
+                  <ul className="text-sm text-gray-600 leading-relaxed list-disc list-inside space-y-1">
+                    {product.benefits.map((b) => <li key={b}>{b}</li>)}
+                  </ul>
+                </div>
+              )}
+              {product.usageInstructions && (
+                <div>
+                  <h3 className="text-sm font-bold uppercase tracking-wide text-stone-700 mb-2">Usage</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{product.usageInstructions}</p>
+                </div>
+              )}
+              {product.storageInstructions && (
+                <div>
+                  <h3 className="text-sm font-bold uppercase tracking-wide text-stone-700 mb-2">Storage</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{product.storageInstructions}</p>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Quality guarantees */}
           <div className="mt-6 grid sm:grid-cols-3 gap-4">

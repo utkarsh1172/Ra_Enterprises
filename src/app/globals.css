@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ── RA Enterprises – Custom Global Styles ───────────────── */
+/* ── RA A1 Masale – Custom Global Styles ───────────────── */
 
 @layer base {
   html {
@@ -10,18 +10,20 @@
   body {
     background-color: #fffdf8;
     color: #2a1710;
+    font-family: var(--font-body), 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3 {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-display), Georgia, serif;
+    font-optical-sizing: auto;
   }
 }
 
 @layer utilities {
   .font-serif {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-display), Georgia, serif;
   }
 
   .text-spice-brown {
@@ -34,7 +36,8 @@
   }
 
   .font-display {
-    font-family: Georgia, 'Times New Roman', serif;
+    font-family: var(--font-display), Georgia, serif;
+    font-optical-sizing: auto;
   }
 
   .grain {

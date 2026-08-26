@@ -1,5 +1,5 @@
 // ============================================================
-// RA Enterprises – WhatsApp Utility
+// RA A1 Masale – WhatsApp Utility
 // ============================================================
 // Replace WHATSAPP_NUMBER with your actual number (with country
 // code, no + sign or spaces) — e.g. "919876543210"
@@ -10,7 +10,7 @@ import { CartItem } from '@/types';
 export const WHATSAPP_NUMBER = '919999999999'; // ← REPLACE THIS
 
 export const BUSINESS_INFO = {
-  name: 'RA Enterprises',
+  name: 'RA A1 Masale',
   tagline: 'Finest Spices & Blends',
   address: 'Maharashtra, India',       // ← REPLACE with full address
   email: 'contact@raenterprises.in',   // ← REPLACE
@@ -36,7 +36,7 @@ export function buildWhatsAppOrderUrl(items: CartItem[]): string {
   );
 
   const message =
-    `Hello RA Enterprises! 🌶️\n\n` +
+    `Hello RA A1 Masale! 🌶️\n\n` +
     `I would like to place the following order:\n\n` +
     lines.join('\n') +
     `\n\n*Total: ₹${total}*\n\n` +
@@ -48,6 +48,6 @@ export function buildWhatsAppOrderUrl(items: CartItem[]): string {
 /**
  * Build a simple WhatsApp chat URL (for the floating button / contact page).
  */
-export function buildWhatsAppChatUrl(message = 'Hello RA Enterprises! 🌶️'): string {
+export function buildWhatsAppChatUrl(message = 'Hello RA A1 Masale! 🌶️'): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }

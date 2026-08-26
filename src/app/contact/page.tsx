@@ -20,7 +20,7 @@ export default function ContactPage() {
     e.preventDefault();
     // Build a WhatsApp message with the form data
     const msg =
-      `Hello RA Enterprises! 🌶️\n\n` +
+      `Hello RA A1 Masale! 🌶️\n\n` +
       `Name: ${form.name}\n` +
       `Email: ${form.email}\n` +
       `Phone: ${form.phone}\n\n` +

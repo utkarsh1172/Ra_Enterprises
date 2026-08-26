@@ -8,7 +8,7 @@ import { CheckIcon } from '@/components/layout/Icons';
 export const metadata: Metadata = {
   title: 'About Us',
   description:
-    'Learn about RA Enterprises — our story, our commitment to purity, and our traditional approach to crafting authentic Indian spices and masalas.',
+    'Learn about RA A1 Masale — our story, our commitment to purity, and our traditional approach to crafting authentic Indian spices and masalas.',
 };
 
 const values = [
@@ -35,7 +35,7 @@ const values = [
 ];
 
 const milestones = [
-  { year: '2010', event: 'RA Enterprises founded with a vision to preserve traditional spice blending.' },
+  { year: '2010', event: 'RA A1 Masale founded with a vision to preserve traditional spice blending.' },
   { year: '2013', event: 'Launched our signature Ghati Masala, inspired by Sahyadri heritage.' },
   { year: '2016', event: 'Introduced the beloved Malvani Masala for coastal cuisine lovers.' },
   { year: '2019', event: 'Expanded product range to include premium pure spice powders.' },
@@ -55,7 +55,7 @@ export default function AboutPage() {
             Our Story
           </span>
           <h1 className="text-4xl md:text-5xl font-bold font-serif text-white">
-            About RA Enterprises
+            About RA A1 Masale
           </h1>
           <div className="flex items-center justify-center gap-3 mt-4">
             <div className="h-px w-12 bg-amber-500" />
@@ -64,7 +64,7 @@ export default function AboutPage() {
           </div>
           <p className="mt-5 text-amber-200 max-w-2xl mx-auto text-base leading-relaxed">
             Born from a passion for authentic flavour and a deep respect for India&apos;s
-            spice heritage — we are RA Enterprises.
+            spice heritage — we are RA A1 Masale.
           </p>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
             />
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                RA Enterprises was founded with a single, unwavering mission: to bring the
+                RA A1 Masale was founded with a single, unwavering mission: to bring the
                 authentic taste of Indian spices to every kitchen — without compromise.
               </p>
               <p>
@@ -108,7 +108,7 @@ export default function AboutPage() {
                 a recipe handed down through generations, rooted in the Sahyadri mountains.
               </p>
               <p>
-                Word spread. Families came back for more. Today, RA Enterprises serves
+                Word spread. Families came back for more. Today, RA A1 Masale serves
                 thousands of households, still following the same principles: pure ingredients,
                 traditional grinding, and honest blending.
               </p>
@@ -187,7 +187,7 @@ export default function AboutPage() {
           Taste the Difference Today
         </h2>
         <p className="text-amber-100 mb-7 max-w-md mx-auto">
-          Join thousands of happy households who have made RA Enterprises a part of their daily cooking.
+          Join thousands of happy households who have made RA A1 Masale a part of their daily cooking.
         </p>
         <Link
           href="/products"

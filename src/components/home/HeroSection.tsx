@@ -14,7 +14,7 @@ export default function HeroSection() {
     <section className="relative min-h-[calc(100vh-72px)] overflow-hidden bg-[#241009] text-white">
       <Image
         src="/images/whole-spice-selection.jpeg"
-        alt="RA Enterprises whole spices arranged for traditional masala preparation"
+        alt="RA A1 Masale whole spices arranged for traditional masala preparation"
         fill
         priority
         className="object-cover object-[62%_center]"
