@@ -4,8 +4,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
 import { ShoppingCartIcon, Bars3Icon, XMarkIcon } from './Icons';
+import { LogoMark } from './Logo';
 
 const navLinks = [
   { href: '/',          label: 'Home'     },
@@ -26,15 +28,12 @@ export default function Header() {
 
           {/* Logo */}
           <Link href="/" className="group flex shrink-0 items-center gap-3">
-            <div className="relative grid h-10 w-10 place-items-center overflow-hidden rounded-[14px] bg-[#6f2417] text-sm font-black tracking-tight text-[#ffc45b] shadow-lg shadow-amber-950/20 transition-transform group-hover:-rotate-3">
-              <span className="relative z-10">RA</span>
-              <span className="absolute -bottom-3 -right-2 text-3xl text-orange-400/35">✦</span>
-            </div>
+            <LogoMark size={44} className="shrink-0 drop-shadow-sm transition-transform group-hover:-rotate-3" />
             <div className="leading-tight">
-              <span className="block font-serif text-lg font-bold text-[#542315]">
+              <span className="block font-serif text-h4 text-[#542315]">
                 RA A1 Masale
               </span>
-              <span className="block text-[10px] font-bold uppercase tracking-[0.15em] text-[#b15a2a]">
+              <span className="block text-caption uppercase text-[#b15a2a]">
                 Crafted Masalas
               </span>
             </div>
@@ -46,7 +45,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-4 py-2 text-sm font-semibold text-stone-600 transition-colors hover:bg-orange-50 hover:text-[#8d301d]"
+                className="rounded-full px-4 py-2 text-nav text-stone-600 transition-colors hover:bg-orange-50 hover:text-[#8d301d]"
               >
                 {link.label}
               </Link>
@@ -62,11 +61,20 @@ export default function Header() {
               aria-label="Shopping cart"
             >
               <ShoppingCartIcon className="h-5 w-5" />
-              {cart.totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cart.totalItems > 9 ? '9+' : cart.totalItems}
-                </span>
-              )}
+              <AnimatePresence>
+                {cart.totalItems > 0 && (
+                  <motion.span
+                    key={cart.totalItems}
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0, opacity: 0 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 20 }}
+                    className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                  >
+                    {cart.totalItems > 9 ? '9+' : cart.totalItems}
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </Link>
 
             {/* Mobile hamburger */}
@@ -96,7 +104,7 @@ export default function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-4 py-3 text-base font-semibold text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-colors"
+                className="rounded-lg px-4 py-3 text-nav text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-colors"
               >
                 {link.label}
               </Link>

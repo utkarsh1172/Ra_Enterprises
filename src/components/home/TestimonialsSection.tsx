@@ -2,6 +2,8 @@
 
 import SectionTitle from '@/components/ui/SectionTitle';
 import { StarIcon } from '@/components/layout/Icons';
+import Reveal from '@/components/motion/Reveal';
+import StaggerGrid from '@/components/motion/StaggerGrid';
 
 // Add or remove testimonials here as you collect reviews
 const testimonials = [
@@ -43,17 +45,19 @@ export default function TestimonialsSection() {
   return (
     <section className="py-20 bg-amber-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle
-          label="What Our Customers Say"
-          title="Loved Across India"
-          subtitle="Real reviews from families who trust RA A1 Masale every day."
-        />
+        <Reveal>
+          <SectionTitle
+            label="What Our Customers Say"
+            title="Loved Across India"
+            subtitle="Real reviews from families who trust RA A1 Masale every day."
+          />
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerGrid className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t) => (
             <div
               key={t.name}
-              className="bg-white rounded-2xl p-6 shadow-md border border-amber-100 flex flex-col gap-4"
+              className="bg-white rounded-2xl p-6 shadow-md border border-amber-100 flex flex-col gap-4 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-950/10"
             >
               <StarRating rating={t.rating} />
               <p className="text-gray-700 text-sm leading-relaxed flex-1 italic">
@@ -70,7 +74,7 @@ export default function TestimonialsSection() {
               </div>
             </div>
           ))}
-        </div>
+        </StaggerGrid>
       </div>
     </section>
   );

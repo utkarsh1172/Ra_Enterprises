@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { LogoMark } from '@/components/layout/Logo';
 
 const NAV_ITEMS = [
   { href: '/admin/dashboard', label: 'Dashboard' },
@@ -15,7 +16,8 @@ export default function AdminSidebar() {
 
   return (
     <aside className="w-60 shrink-0 border-r border-stone-200 bg-white h-screen sticky top-0 flex flex-col">
-      <div className="px-5 py-5 border-b border-stone-200">
+      <div className="px-5 py-5 border-b border-stone-200 flex items-center gap-2.5">
+        <LogoMark size={30} className="shrink-0" />
         <span className="font-serif text-lg font-bold text-amber-800">RA Admin</span>
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1">

@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { CheckIcon, SparklesIcon } from '@/components/layout/Icons';
+import Reveal from '@/components/motion/Reveal';
 
 const highlights = [
   'Whole spices selected for aroma, colour and character',
@@ -14,7 +15,7 @@ export default function IntroSection() {
   return (
     <section className="bg-[#fffdf8] py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <div className="relative order-2 lg:order-1">
+        <Reveal x={-24} y={0} className="relative order-2 lg:order-1">
           <div className="relative aspect-[4/4.6] max-w-[500px] overflow-hidden rounded-[2rem] bg-[#4a1f13] shadow-2xl shadow-amber-950/15">
             <Image src="/images/whole-spices-bowls.jpeg" alt="Whole spices prepared in traditional bowls" fill className="object-cover object-center" />
             <div className="absolute inset-0 bg-gradient-to-t from-[#2d1008]/75 via-transparent to-transparent" />
@@ -31,9 +32,9 @@ export default function IntroSection() {
             <p className="font-serif text-lg font-bold text-[#542315]">No fillers. No fuss.</p>
             <p className="mt-1 text-xs leading-relaxed text-stone-500">Just wonderfully aromatic spices that let your cooking shine.</p>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="order-1 lg:order-2">
+        <Reveal x={24} y={0} delay={0.1} className="order-1 lg:order-2">
           <SectionTitle label="Our story" title="Made with a pinch of tradition." centered={false} />
           <p className="max-w-xl text-base leading-7 text-stone-600">
             At RA A1 Masale, we believe the smallest ingredients make the biggest difference. We source thoughtfully, roast with care and blend with the patience great food deserves.
@@ -56,7 +57,7 @@ export default function IntroSection() {
             Discover our craft
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

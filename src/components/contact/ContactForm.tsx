@@ -33,7 +33,7 @@ export default function ContactForm() {
 
   return (
     <div className="bg-white rounded-2xl shadow-md border border-amber-100 p-8">
-      <h2 className="text-xl font-bold font-serif text-stone-800 mb-6">
+      <h2 className="font-serif text-h3 text-stone-800 mb-6">
         Send Us a Message
       </h2>
 
@@ -54,7 +54,7 @@ export default function ContactForm() {
       ) : (
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1" htmlFor="name">
+            <label className="block text-label text-gray-700 mb-1" htmlFor="name">
               Your Name *
             </label>
             <input
@@ -65,13 +65,13 @@ export default function ContactForm() {
               value={form.name}
               onChange={handleChange}
               placeholder="e.g. Rahul Sharma"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
             />
           </div>
 
           <div className="grid sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1" htmlFor="email">
+              <label className="block text-label text-gray-700 mb-1" htmlFor="email">
                 Email
               </label>
               <input
@@ -81,11 +81,11 @@ export default function ContactForm() {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-1" htmlFor="phone">
+              <label className="block text-label text-gray-700 mb-1" htmlFor="phone">
                 Phone / WhatsApp
               </label>
               <input
@@ -95,13 +95,13 @@ export default function ContactForm() {
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="+91 98765 43210"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-gray-700 mb-1" htmlFor="message">
+            <label className="block text-label text-gray-700 mb-1" htmlFor="message">
               Message *
             </label>
             <textarea
@@ -112,7 +112,7 @@ export default function ContactForm() {
               value={form.message}
               onChange={handleChange}
               placeholder="Tell us about your order or inquiry..."
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition resize-none"
             />
           </div>
 

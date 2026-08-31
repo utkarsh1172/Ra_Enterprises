@@ -39,7 +39,7 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
     <div className="space-y-5">
       {/* Size selector */}
       <div>
-        <label className="block text-sm font-semibold text-gray-700 mb-2">
+        <label className="block text-label text-gray-700 mb-2">
           Select Size
         </label>
         <div className="flex flex-wrap gap-2">
@@ -62,11 +62,11 @@ export default function AddToCartSection({ product }: AddToCartSectionProps) {
 
       {/* Price display */}
       <div className="flex items-baseline gap-2">
-        <span className="text-3xl font-bold text-amber-700">
+        <span className="text-price-lg tabular-nums text-amber-700">
           ₹{selectedSize.price * quantity}
         </span>
         {quantity > 1 && (
-          <span className="text-sm text-gray-500">
+          <span className="text-small text-gray-500">
             (₹{selectedSize.price} × {quantity})
           </span>
         )}

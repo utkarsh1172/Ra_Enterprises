@@ -150,14 +150,14 @@ export default async function ProductDetailPage({ params }: Props) {
           {/* Details */}
           <div className="space-y-6">
             {product.nameHindi && (
-              <p className="text-amber-600 font-medium">{product.nameHindi}</p>
+              <p className="text-small font-semibold text-amber-600">{product.nameHindi}</p>
             )}
 
-            <h1 className="text-3xl md:text-4xl font-bold font-serif text-stone-900">
+            <h1 className="font-serif text-product-name-lg text-stone-900">
               {product.name}
             </h1>
 
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-body-lg text-gray-600 leading-relaxed">
               {product.description}
             </p>
 

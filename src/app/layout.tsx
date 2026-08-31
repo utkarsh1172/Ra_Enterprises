@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fraunces, Manrope } from 'next/font/google';
+import { Fraunces, Manrope, Yeseva_One } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -59,6 +59,15 @@ const manrope = Manrope({
   weight: ['400', '500', '600', '700', '800'],
 });
 
+// Distinct display face reserved for the homepage hero headline only —
+// keeps the brand's single most visible line from reading as a generic
+// "Fraunces + Manrope" AI-template pairing.
+const yesevaOne = Yeseva_One({
+  subsets: ['latin'],
+  variable: '--font-hero',
+  weight: '400',
+});
+
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 const organizationJsonLd = {
@@ -66,7 +75,7 @@ const organizationJsonLd = {
   '@type': 'Organization',
   name: 'RA A1 Masale',
   url: SITE_URL,
-  logo: `${SITE_URL}/favicon.ico`,
+  logo: `${SITE_URL}/icon.svg`,
   telephone: '+919920382812',
   email: 'utkarsh117@gmail.com',
   address: {
@@ -88,7 +97,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
+    <html lang="en" className={`${fraunces.variable} ${manrope.variable} ${yesevaOne.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
         {/* Organization structured data for SEO */}
         <script

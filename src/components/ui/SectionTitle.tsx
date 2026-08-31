@@ -24,13 +24,13 @@ export default function SectionTitle({
     <div className={`${centered ? 'text-center' : ''} mb-10`}>
       {label && (
         <span
-          className={`mb-3 inline-block text-[11px] font-black uppercase tracking-[0.18em] ${labelColor}`}
+          className={`mb-3 inline-block text-eyebrow uppercase ${labelColor}`}
         >
           {label}
         </span>
       )}
       <h2
-        className={`font-serif text-4xl font-bold leading-[1.05] tracking-[-0.035em] md:text-5xl ${textColor}`}
+        className={`font-serif text-h2 ${textColor}`}
       >
         {title}
       </h2>
@@ -43,7 +43,7 @@ export default function SectionTitle({
       </div>
 
       {subtitle && (
-        <p className={`mt-5 max-w-2xl ${centered ? 'mx-auto' : ''} text-base leading-7 md:text-lg ${subtitleColor}`}>
+        <p className={`mt-5 max-w-2xl ${centered ? 'mx-auto' : ''} text-body-lg ${subtitleColor}`}>
           {subtitle}
         </p>
       )}

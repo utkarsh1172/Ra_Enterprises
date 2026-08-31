@@ -95,10 +95,10 @@ export default function JourneyPage() {
         <div className="absolute inset-0 opacity-5 pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(circle, #f59e0b 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
         <div className="relative z-10">
-          <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">
+          <span className="inline-block text-eyebrow uppercase text-amber-400 mb-3">
             From Farm to Kitchen
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold font-serif text-white">
+          <h1 className="font-serif text-h1 text-white">
             How We Make Our Masalas
           </h1>
           <div className="flex items-center justify-center gap-3 mt-4">

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import type { Product } from '@/types';
 import ProductCard from '@/components/products/ProductCard';
+import StaggerGrid from '@/components/motion/StaggerGrid';
 
 interface Props {
   products: Product[];
@@ -42,11 +43,11 @@ export default function ProductsFilterClient({ products, categoryLabels }: Props
 
       {/* Grid */}
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <StaggerGrid key={activeFilter} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
-        </div>
+        </StaggerGrid>
       ) : (
         <div className="text-center py-20 text-gray-400">
           <span className="text-5xl block mb-4">🌶️</span>

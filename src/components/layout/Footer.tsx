@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { WhatsAppIcon, MapPinIcon, PhoneIcon, EnvelopeIcon } from './Icons';
+import { LogoMark } from './Logo';
 import { BUSINESS_INFO, WHATSAPP_NUMBER, buildWhatsAppChatUrl } from '@/utils/whatsapp';
 
 export default function Footer() {
@@ -31,8 +32,11 @@ export default function Footer() {
 
         {/* Brand */}
         <div>
-          <h3 className="text-white text-xl font-bold font-serif mb-3">RA A1 Masale</h3>
-          <p className="text-sm leading-relaxed text-stone-400">
+          <div className="flex items-center gap-3 mb-3">
+            <LogoMark size={36} className="shrink-0" />
+            <h3 className="text-white font-serif text-h4">RA A1 Masale</h3>
+          </div>
+          <p className="text-small leading-relaxed text-stone-400">
             Crafting India&apos;s finest spice blends with generations of expertise.
             From farm to your kitchen — pure, honest, and full of flavour.
           </p>
@@ -51,10 +55,10 @@ export default function Footer() {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-white font-semibold mb-4 uppercase text-xs tracking-widest">
+          <h4 className="text-white text-eyebrow uppercase mb-4">
             Quick Links
           </h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-nav">
             {[
               { href: '/',          label: 'Home'        },
               { href: '/products',  label: 'Products'    },
@@ -77,10 +81,10 @@ export default function Footer() {
 
         {/* Contact */}
         <div>
-          <h4 className="text-white font-semibold mb-4 uppercase text-xs tracking-widest">
+          <h4 className="text-white text-eyebrow uppercase mb-4">
             Contact Us
           </h4>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-nav">
             <li className="flex items-start gap-2">
               <MapPinIcon className="w-4 h-4 mt-0.5 text-amber-500 shrink-0" />
               <span>{BUSINESS_INFO.address}</span>
@@ -119,10 +123,10 @@ export default function Footer() {
 
         {/* Categories */}
         <div>
-          <h4 className="text-white font-semibold mb-4 uppercase text-xs tracking-widest">
+          <h4 className="text-white text-eyebrow uppercase mb-4">
             Our Range
           </h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-nav">
             {[
               { href: '/products?category=masala-blends', label: 'Masala Blends' },
               { href: '/products?category=pure-spices',   label: 'Pure Spices'   },

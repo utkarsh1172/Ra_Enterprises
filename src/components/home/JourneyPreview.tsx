@@ -4,6 +4,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import SectionTitle from '@/components/ui/SectionTitle';
 import { ArrowRightIcon } from '@/components/layout/Icons';
+import Reveal from '@/components/motion/Reveal';
+import StaggerGrid from '@/components/motion/StaggerGrid';
 
 const steps = [
   {
@@ -45,14 +47,16 @@ export default function JourneyPreview() {
       />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <SectionTitle
-          label="From Farm to Kitchen"
-          title="How We Make Our Masalas"
-          subtitle="Every step is guided by tradition, care, and an unwavering commitment to quality."
-          light
-        />
+        <Reveal>
+          <SectionTitle
+            label="From Farm to Kitchen"
+            title="How We Make Our Masalas"
+            subtitle="Every step is guided by tradition, care, and an unwavering commitment to quality."
+            light
+          />
+        </Reveal>
 
-        <div className="relative mb-10 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#2b0f08] shadow-2xl shadow-black/20">
+        <Reveal delay={0.1} className="relative mb-10 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#2b0f08] shadow-2xl shadow-black/20">
           <Image
             src="/images/traditional-spice-prep.jpeg"
             alt="Traditional masala ingredients being prepared by hand"
@@ -64,35 +68,35 @@ export default function JourneyPreview() {
           <div className="absolute inset-y-0 left-0 flex max-w-md items-center p-7 sm:p-10">
             <p className="font-serif text-2xl font-bold leading-tight text-[#fff3d8] sm:text-3xl">Real ingredients, prepared with the care your kitchen deserves.</p>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+        <StaggerGrid className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
           {steps.map((s) => (
             <div
               key={s.step}
-              className="relative rounded-2xl border border-white/10 bg-white/[0.07] p-6 text-white backdrop-blur-sm transition-colors duration-200 hover:bg-white/[0.12]"
+              className="group relative h-full rounded-2xl border border-white/10 bg-white/[0.07] p-6 text-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/[0.12] hover:border-amber-300/30"
             >
               {/* Step number */}
-              <span className="absolute top-4 right-4 text-4xl font-bold text-white/10 select-none">
+              <span className="absolute top-4 right-4 text-4xl font-bold text-white/10 select-none transition-colors duration-300 group-hover:text-white/20">
                 {s.step}
               </span>
 
-              <div className="text-4xl mb-4">{s.icon}</div>
+              <div className="text-4xl mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">{s.icon}</div>
               <h3 className="mb-2 font-serif text-xl font-bold">{s.title}</h3>
               <p className="text-sm leading-relaxed text-amber-100/70">{s.desc}</p>
             </div>
           ))}
-        </div>
+        </StaggerGrid>
 
-        <div className="mt-10 text-center">
+        <Reveal delay={0.15} className="mt-10 text-center">
           <Link
             href="/journey"
-            className="inline-flex items-center gap-2 rounded-full bg-[#f5a831] px-7 py-3.5 text-sm font-bold text-[#38170e] transition-all hover:-translate-y-0.5 hover:bg-[#ffc45b]"
+            className="group inline-flex items-center gap-2 rounded-full bg-[#f5a831] px-7 py-3.5 text-sm font-bold text-[#38170e] transition-all hover:-translate-y-0.5 hover:bg-[#ffc45b]"
           >
             See Full Process
-            <ArrowRightIcon className="w-4 h-4" />
+            <ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

@@ -1,5 +1,112 @@
 @import "tailwindcss";
 
+/* ============================================================
+   RA A1 Masale — Centralized Typography System
+   Fraunces (editorial serif) = brand/heading voice
+   Manrope (humanist sans)    = UI/body/price voice
+   One deliberate scale, reused everywhere via `text-*` utilities
+   — never hardcode a one-off font-size/tracking pair again.
+   ============================================================ */
+@theme {
+  /* Hero display — brand statement, used once per page. Yeseva One only
+     ships weight 400, but it's a naturally heavy display face already. */
+  --text-hero: clamp(2.5rem, 1.8rem + 2.8vw, 4.25rem);
+  --text-hero--line-height: 1.08;
+  --text-hero--letter-spacing: -0.005em;
+  --text-hero--font-weight: 400;
+
+  /* H1 — page titles (About Us, Contact Us, Spices & Masalas) */
+  --text-h1: clamp(2rem, 1.6rem + 1.6vw, 3rem);
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h1--font-weight: 700;
+
+  /* H2 — section titles (SectionTitle component) */
+  --text-h2: clamp(1.75rem, 1.5rem + 1vw, 2.5rem);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.015em;
+  --text-h2--font-weight: 700;
+
+  /* H3 — subsection headings */
+  --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-h3--line-height: 1.2;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 700;
+
+  /* H4 — minor/card headings */
+  --text-h4: clamp(1.0625rem, 1rem + 0.25vw, 1.25rem);
+  --text-h4--line-height: 1.25;
+  --text-h4--font-weight: 600;
+
+  /* Eyebrow — small uppercase kicker label, unified tracking (was 0.08–0.2em scattered) */
+  --text-eyebrow: clamp(0.6875rem, 0.65rem + 0.1vw, 0.75rem);
+  --text-eyebrow--line-height: 1;
+  --text-eyebrow--letter-spacing: 0.1em;
+  --text-eyebrow--font-weight: 700;
+
+  /* Product name — card vs. detail page */
+  --text-product-name: clamp(1.0625rem, 1rem + 0.2vw, 1.125rem);
+  --text-product-name--line-height: 1.2;
+  --text-product-name--letter-spacing: -0.01em;
+  --text-product-name--font-weight: 600;
+
+  --text-product-name-lg: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+  --text-product-name-lg--line-height: 1.1;
+  --text-product-name-lg--letter-spacing: -0.015em;
+  --text-product-name-lg--font-weight: 700;
+
+  /* Price — humanist sans, tabular figures, confident but not shouty */
+  --text-price: clamp(1.25rem, 1.15rem + 0.4vw, 1.375rem);
+  --text-price--line-height: 1;
+  --text-price--letter-spacing: -0.01em;
+  --text-price--font-weight: 800;
+
+  --text-price-lg: clamp(1.75rem, 1.55rem + 1vw, 2.25rem);
+  --text-price-lg--line-height: 1;
+  --text-price-lg--letter-spacing: -0.015em;
+  --text-price-lg--font-weight: 800;
+
+  /* Nav / buttons / forms — quiet, modern, highly readable */
+  --text-nav: 0.875rem;
+  --text-nav--font-weight: 600;
+
+  --text-button-sm: 0.8125rem;
+  --text-button-sm--font-weight: 700;
+  --text-button-sm--letter-spacing: 0.01em;
+
+  --text-button: 0.9375rem;
+  --text-button--font-weight: 700;
+  --text-button--letter-spacing: 0.01em;
+
+  --text-button-lg: 1rem;
+  --text-button-lg--font-weight: 700;
+  --text-button-lg--letter-spacing: 0.01em;
+
+  --text-label: 0.8125rem;
+  --text-label--line-height: 1.3;
+  --text-label--font-weight: 600;
+  --text-label--letter-spacing: 0.01em;
+
+  --text-input: 0.9375rem;
+  --text-input--line-height: 1.4;
+  --text-input--font-weight: 500;
+
+  /* Body copy */
+  --text-body: 1rem;
+  --text-body--line-height: 1.7;
+
+  --text-body-lg: 1.0625rem;
+  --text-body-lg--line-height: 1.7;
+
+  --text-small: 0.8125rem;
+  --text-small--line-height: 1.4;
+
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.3;
+  --text-caption--letter-spacing: 0.06em;
+  --text-caption--font-weight: 600;
+}
+
 /* ── RA A1 Masale – Custom Global Styles ───────────────── */
 
 @layer base {
@@ -78,6 +185,11 @@
   .font-display {
     font-family: var(--font-display), Georgia, serif;
     font-optical-sizing: auto;
+  }
+
+  /* Hero-only display face — deliberately distinct from font-serif/font-display */
+  .font-hero {
+    font-family: var(--font-hero), Georgia, serif;
   }
 
   .grain {

@@ -50,10 +50,10 @@ export default async function ProductsPage() {
       />
       {/* Page header */}
       <div className="bg-gradient-to-br from-amber-950 to-red-950 py-16 px-4 text-center">
-        <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">
+        <span className="inline-block text-eyebrow uppercase text-amber-400 mb-3">
           Our Products
         </span>
-        <h1 className="text-4xl md:text-5xl font-bold font-serif text-white">
+        <h1 className="font-serif text-h1 text-white">
           Spices &amp; Masalas
         </h1>
         <div className="flex items-center justify-center gap-3 mt-4">
