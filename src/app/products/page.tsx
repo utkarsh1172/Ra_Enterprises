@@ -13,11 +13,41 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export default async function ProductsPage() {
   const [products, categoryLabels] = await Promise.all([getAllProducts(), getCategoryLabels()]);
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: products.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `${SITE_URL}/products/${p.slug}`,
+      name: p.name,
+    })),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/products` },
+    ],
+  };
+
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       {/* Page header */}
       <div className="bg-gradient-to-br from-amber-950 to-red-950 py-16 px-4 text-center">
         <span className="inline-block text-xs font-semibold uppercase tracking-widest text-amber-400 mb-3">

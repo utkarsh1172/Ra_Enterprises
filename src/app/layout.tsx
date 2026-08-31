@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   },
   description:
     'RA A1 Masale offers 100% natural, stone-ground spices and masala blends including Ghati Masala, Malvani Masala, and more. Pure tradition, authentic flavour.',
+  alternates: { canonical: '/' },
   keywords: [
     'RA A1 Masale', 'spices', 'masala', 'Ghati Masala', 'Malvani Masala',
     'Indian spices', 'pure spices', 'natural masala', 'Maharashtra spices',
@@ -37,6 +38,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Optional: set GOOGLE_SITE_VERIFICATION in .env for meta-tag verification
+  // instead of/in addition to the HTML file method.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 const fraunces = Fraunces({
@@ -53,6 +59,29 @@ const manrope = Manrope({
   weight: ['400', '500', '600', '700', '800'],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'RA A1 Masale',
+  url: SITE_URL,
+  logo: `${SITE_URL}/favicon.ico`,
+  telephone: '+919920382812',
+  email: 'utkarsh117@gmail.com',
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'Maharashtra',
+    addressCountry: 'IN',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+919920382812',
+    email: 'utkarsh117@gmail.com',
+    contactType: 'customer service',
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -61,6 +90,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
       <body className="antialiased min-h-screen flex flex-col">
+        {/* Organization structured data for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         {/* Cart state is available across all pages */}
         <CartProvider>
           <Header />

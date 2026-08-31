@@ -8,15 +8,8 @@ import TestimonialsSection from '@/components/home/TestimonialsSection';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
-const organizationJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'RA A1 Masale',
-  url: SITE_URL,
-  description:
-    'RA A1 Masale offers 100% natural, stone-ground spices and masala blends including Ghati Masala, Malvani Masala, and more.',
-};
-
+// Organization data lives in the root layout; this page only adds
+// WebSite + SearchAction so Google can offer a sitelinks searchbox.
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -27,10 +20,6 @@ const websiteJsonLd = {
 export default function HomePage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}

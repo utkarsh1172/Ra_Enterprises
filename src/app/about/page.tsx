@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: 'About Us',
   description:
     'Learn about RA A1 Masale — our story, our commitment to purity, and our traditional approach to crafting authentic Indian spices and masalas.',
+  alternates: { canonical: '/about' },
 };
 
 const values = [

@@ -7,13 +7,13 @@
 
 import { CartItem } from '@/types';
 
-export const WHATSAPP_NUMBER = '919999999999'; // ← REPLACE THIS
+export const WHATSAPP_NUMBER = '919920382812';
 
 export const BUSINESS_INFO = {
   name: 'RA A1 Masale',
   tagline: 'Finest Spices & Blends',
   address: 'Maharashtra, India',       // ← REPLACE with full address
-  email: 'contact@raenterprises.in',   // ← REPLACE
+  email: 'utkarsh117@gmail.com',
   mapEmbedUrl: '',                     // ← ADD Google Maps embed URL
 };
 

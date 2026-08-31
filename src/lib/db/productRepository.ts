@@ -1,10 +1,11 @@
-import { readJson, writeJson } from './jsonStore';
+import { db } from '@/lib/firebase/admin';
 import type { Product } from '@/types';
 
-const FILE = 'products.json';
+const COLLECTION = 'products';
 
 export async function listProducts(): Promise<Product[]> {
-  return readJson<Product[]>(FILE);
+  const snapshot = await db.collection(COLLECTION).get();
+  return snapshot.docs.map((doc) => doc.data() as Product);
 }
 
 export async function listActiveProducts(): Promise<Product[]> {
@@ -12,11 +13,13 @@ export async function listActiveProducts(): Promise<Product[]> {
 }
 
 export async function getProductById(id: string): Promise<Product | undefined> {
-  return (await listProducts()).find((p) => p.id === id);
+  const doc = await db.collection(COLLECTION).doc(id).get();
+  return doc.exists ? (doc.data() as Product) : undefined;
 }
 
 export async function getProductBySlug(slug: string): Promise<Product | undefined> {
-  return (await listProducts()).find((p) => p.slug === slug);
+  const snapshot = await db.collection(COLLECTION).where('slug', '==', slug).limit(1).get();
+  return snapshot.empty ? undefined : (snapshot.docs[0].data() as Product);
 }
 
 export async function getActiveProductBySlug(slug: string): Promise<Product | undefined> {
@@ -43,9 +46,9 @@ function slugify(input: string): string {
 export async function createProduct(
   input: Omit<Product, 'id' | 'createdAt' | 'updatedAt' | 'slug'> & { slug?: string }
 ): Promise<Product> {
-  const products = await listProducts();
   const slug = input.slug || slugify(input.name);
-  if (products.some((p) => p.slug === slug)) {
+  const existing = await getProductBySlug(slug);
+  if (existing) {
     throw new Error(`A product with slug "${slug}" already exists`);
   }
   const now = new Date().toISOString();
@@ -56,8 +59,7 @@ export async function createProduct(
     createdAt: now,
     updatedAt: now,
   };
-  products.push(product);
-  await writeJson(FILE, products);
+  await db.collection(COLLECTION).doc(slug).set(product);
   return product;
 }
 
@@ -66,20 +68,18 @@ export async function updateProduct(
   patch: Partial<Omit<Product, 'id' | 'createdAt'>>,
   updatedBy?: string
 ): Promise<Product | undefined> {
-  const products = await listProducts();
-  const index = products.findIndex((p) => p.id === id);
-  if (index === -1) return undefined;
+  const existing = await getProductById(id);
+  if (!existing) return undefined;
 
   const updated: Product = {
-    ...products[index],
+    ...existing,
     ...patch,
-    id: products[index].id,
-    createdAt: products[index].createdAt,
+    id: existing.id,
+    createdAt: existing.createdAt,
     updatedAt: new Date().toISOString(),
-    updatedBy: updatedBy ?? products[index].updatedBy,
+    updatedBy: updatedBy ?? existing.updatedBy,
   };
-  products[index] = updated;
-  await writeJson(FILE, products);
+  await db.collection(COLLECTION).doc(id).set(updated);
   return updated;
 }
 
@@ -92,10 +92,8 @@ export async function setProductFeatured(id: string, featured: boolean): Promise
 }
 
 export async function deleteProduct(id: string): Promise<boolean> {
-  const products = await listProducts();
-  const index = products.findIndex((p) => p.id === id);
-  if (index === -1) return false;
-  products.splice(index, 1);
-  await writeJson(FILE, products);
+  const existing = await getProductById(id);
+  if (!existing) return false;
+  await db.collection(COLLECTION).doc(id).delete();
   return true;
 }

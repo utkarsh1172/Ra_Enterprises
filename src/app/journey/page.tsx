@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: 'Our Process – How We Make Masalas',
   description:
     'Discover the traditional process behind RA A1 Masale spices — from farm sourcing and sun-drying to stone grinding and quality packaging.',
+  alternates: { canonical: '/journey' },
 };
 
 const steps = [

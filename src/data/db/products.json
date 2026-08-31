@@ -8,12 +8,13 @@
     "category": "masala-blends",
     "description": "An authentic blend from the Sahyadri ghats — bold, earthy, and deeply aromatic.",
     "longDescription": "Ghati Masala is a treasured spice mix originating from the Sahyadri mountain belt of Maharashtra. Our recipe is crafted from hand-picked whole spices, slow-roasted over traditional flame and stone-ground to preserve every note of flavour. It adds a robust, warming depth to bhaji, chutney, meat dishes, and dal. No artificial colours or preservatives — pure tradition in every pinch.",
-    "price": 120,
+    "price": 95,
     "unit": "100g",
     "availableSizes": [
-      { "label": "100g", "price": 120 },
-      { "label": "250g", "price": 280 },
-      { "label": "500g", "price": 520 }
+      { "label": "100g", "price": 95 },
+      { "label": "250g", "price": 238 },
+      { "label": "500g", "price": 475 },
+      { "label": "1kg", "price": 950 }
     ],
     "image": "/images/fresh-masala-texture.jpeg",
     "images": ["/images/fresh-masala-texture.jpeg"],
@@ -36,12 +37,13 @@
     "category": "masala-blends",
     "description": "The fiery soul of the Konkan coast — coconut-based, rich, and irresistibly fragrant.",
     "longDescription": "Malvani Masala is the cornerstone of coastal Konkan cuisine. Our blend uses dried coconut, Kashmiri red chillies, black pepper, and a dozen more whole spices, roasted and ground fresh to deliver that unmistakable oceanic warmth. Perfect for Malvani fish curry, chicken curry, mutton, and crab preparations. Experience the authentic Sindhudurg flavour straight from our kitchen.",
-    "price": 140,
+    "price": 110,
     "unit": "100g",
     "availableSizes": [
-      { "label": "100g", "price": 140 },
-      { "label": "250g", "price": 320 },
-      { "label": "500g", "price": 600 }
+      { "label": "100g", "price": 110 },
+      { "label": "250g", "price": 275 },
+      { "label": "500g", "price": 550 },
+      { "label": "1kg", "price": 1100 }
     ],
     "image": "/images/traditional-spice-prep.jpeg",
     "images": ["/images/traditional-spice-prep.jpeg"],
