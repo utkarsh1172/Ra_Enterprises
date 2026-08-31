@@ -74,6 +74,8 @@ export default function Header() {
               className="lg:hidden flex h-10 w-10 items-center justify-center rounded-full hover:bg-amber-50 transition-colors"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
             >
               {mobileOpen ? (
                 <XMarkIcon className="w-6 h-6 text-[#542315]" />
@@ -87,7 +89,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div className="lg:hidden border-t border-amber-100 bg-[#fffdf8] shadow-lg">
+        <div id="mobile-nav" className="lg:hidden border-t border-amber-100 bg-[#fffdf8] shadow-lg">
           <nav className="flex flex-col py-3 px-4">
             {navLinks.map((link) => (
               <Link
