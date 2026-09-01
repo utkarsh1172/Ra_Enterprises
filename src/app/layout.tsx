@@ -5,33 +5,36 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/layout/WhatsAppButton';
 import { CartProvider } from '@/context/CartContext';
+import Loader from '@/components/loader/Loader';
+import Analytics from '@/components/analytics/Analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
-    default: 'RA A1 Masale – Finest Spices & Blends',
-    template: '%s | RA A1 Masale',
+    default: 'RA A1 Enterprises Masale – Authentic Taste. Pure Spices.',
+    template: '%s | RA A1 Enterprises Masale',
   },
   description:
-    'RA A1 Masale offers 100% natural, stone-ground spices and masala blends including Ghati Masala, Malvani Masala, and more. Pure tradition, authentic flavour.',
+    'RA A1 Enterprises brings 100% natural, stone-ground Indian spices and masala blends — Ghati Masala, Malvani Masala and more — to every kitchen. Authentic taste, pure spices.',
   alternates: { canonical: '/' },
   keywords: [
-    'RA A1 Masale', 'spices', 'masala', 'Ghati Masala', 'Malvani Masala',
-    'Indian spices', 'pure spices', 'natural masala', 'Maharashtra spices',
+    'RA A1 Enterprises', 'RA A1 Enterprises Masale', 'Indian masala', 'Indian spices',
+    'spice products', 'masala products', 'authentic Indian spices',
+    'Ghati Masala', 'Malvani Masala', 'natural masala', 'Maharashtra spices',
   ],
-  authors: [{ name: 'RA A1 Masale' }],
-  creator: 'RA A1 Masale',
+  authors: [{ name: 'RA A1 Enterprises' }],
+  creator: 'RA A1 Enterprises',
   openGraph: {
     type: 'website',
     locale: 'en_IN',
-    siteName: 'RA A1 Masale',
-    title: 'RA A1 Masale – Finest Spices & Blends',
+    siteName: 'RA A1 Enterprises Masale',
+    title: 'RA A1 Enterprises Masale – Authentic Taste. Pure Spices.',
     description:
       'Pure, natural, stone-ground masalas crafted with generations of expertise.',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'RA A1 Masale – Finest Spices & Blends',
+    title: 'RA A1 Enterprises Masale – Authentic Taste. Pure Spices.',
     description: 'Pure, natural, stone-ground masalas crafted with generations of expertise.',
   },
   robots: {
@@ -73,7 +76,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'RA A1 Masale',
+  name: 'RA A1 Enterprises',
   url: SITE_URL,
   logo: `${SITE_URL}/icon.svg`,
   telephone: '+919920382812',
@@ -104,6 +107,8 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        {/* Cinematic first-load brand intro — musal meets masala */}
+        <Loader />
         {/* Cart state is available across all pages */}
         <CartProvider>
           <Header />
@@ -112,6 +117,8 @@ export default function RootLayout({
           {/* Floating WhatsApp button on every page */}
           <WhatsAppButton />
         </CartProvider>
+        {/* GA4 — only loads when NEXT_PUBLIC_GA_ID is configured */}
+        <Analytics />
       </body>
     </html>
   );

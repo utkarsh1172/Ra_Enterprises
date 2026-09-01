@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { WhatsAppIcon } from '@/components/layout/Icons';
 import { WHATSAPP_NUMBER } from '@/utils/whatsapp';
 import Button from '@/components/ui/Button';
+import { trackEvent } from '@/lib/analytics';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
@@ -19,7 +20,7 @@ export default function ContactForm() {
     e.preventDefault();
     // Build a WhatsApp message with the form data
     const msg =
-      `Hello RA A1 Masale! 🌶️\n\n` +
+      `Hello RA A1 Enterprises! 🌶️\n\n` +
       `Name: ${form.name}\n` +
       `Email: ${form.email}\n` +
       `Phone: ${form.phone}\n\n` +
@@ -28,6 +29,7 @@ export default function ContactForm() {
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`,
       '_blank'
     );
+    trackEvent('enquiry_form_submit');
     setSubmitted(true);
   }
 

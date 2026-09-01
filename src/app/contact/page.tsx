@@ -11,10 +11,10 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 export const metadata: Metadata = {
   title: 'Contact Us',
   description:
-    'Get in touch with RA A1 Masale for orders, bulk inquiries, or questions about our spices and masala blends. Reach us via phone, WhatsApp, or email.',
+    'Get in touch with RA A1 Enterprises for orders, bulk inquiries, or questions about our spices and masala blends. Reach us via phone, WhatsApp, or email.',
   alternates: { canonical: '/contact' },
   openGraph: {
-    title: 'Contact RA A1 Masale',
+    title: 'Contact RA A1 Enterprises',
     description: 'Reach us via phone, WhatsApp, or email for orders and inquiries.',
   },
 };

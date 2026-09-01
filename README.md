@@ -38,7 +38,12 @@ Optional:
 NEXT_PUBLIC_SITE_URL=https://your-production-domain.com   # used for canonical URLs, sitemap, JSON-LD, OG images
 GOOGLE_SITE_VERIFICATION=...                                # Search Console meta-tag verification (alternative to HTML file upload)
 AUTH_SECRET=...                                             # NextAuth JWT signing secret — required in production
+NEXT_PUBLIC_GA_ID=...                                        # GA4 Measurement ID (e.g. G-XXXXXXXXXX) — GA only loads when this is set, no fake ID ships in the repo
 ```
+
+## Analytics (GA4)
+
+`src/components/analytics/Analytics.tsx` loads gtag.js via `next/script` (`afterInteractive`, non-blocking) only when `NEXT_PUBLIC_GA_ID` is set. `src/lib/analytics.ts` exports `trackEvent()`, a safe no-op until gtag is present, wired up for: `page_view` (automatic), `product_view`, `product_click`, `contact_click`, `whatsapp_click`, `enquiry_form_submit`, `explore_products_click`.
 
 **If a `.env`/`.env.local` value in this repo was ever pasted into a chat, treat that credential as compromised and rotate it in the Firebase console** — generate a new service account key and delete the old one.
 

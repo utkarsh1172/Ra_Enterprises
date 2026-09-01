@@ -1,5 +1,5 @@
 // ============================================================
-// RA A1 Masale – Type Definitions
+// RA A1 Enterprises – Type Definitions
 // ============================================================
 
 export type StockStatus = 'in_stock' | 'low_stock' | 'out_of_stock';

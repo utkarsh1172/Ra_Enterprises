@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
   return (
     <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-lg border border-stone-200">
       <h1 className="text-xl font-bold text-stone-900 mb-1">Admin Login</h1>
-      <p className="text-sm text-stone-500 mb-6">RA A1 Masale — Admin Panel</p>
+      <p className="text-sm text-stone-500 mb-6">RA A1 Enterprises — Admin Panel</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

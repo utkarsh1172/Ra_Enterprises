@@ -1,9 +1,12 @@
+'use client';
+
 // ── Site Footer ───────────────────────────────────────────────
 
 import Link from 'next/link';
 import { WhatsAppIcon, MapPinIcon, PhoneIcon, EnvelopeIcon } from './Icons';
 import { LogoMark } from './Logo';
 import { BUSINESS_INFO, WHATSAPP_NUMBER, buildWhatsAppChatUrl } from '@/utils/whatsapp';
+import { trackEvent } from '@/lib/analytics';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -20,6 +23,7 @@ export default function Footer() {
             href={buildWhatsAppChatUrl()}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent('whatsapp_click', { location: 'footer_strip' })}
             className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-1.5 rounded-full font-semibold transition-colors"
           >
             <WhatsAppIcon className="w-4 h-4" />
@@ -34,7 +38,10 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-3 mb-3">
             <LogoMark size={36} className="shrink-0" />
-            <h3 className="text-white font-serif text-h4">RA A1 Masale</h3>
+            <div className="leading-tight">
+              <h3 className="text-white font-serif text-h4">RA A1 Enterprises</h3>
+              <span className="block text-caption uppercase text-amber-400/80">Masale / Spices</span>
+            </div>
           </div>
           <p className="text-small leading-relaxed text-stone-400">
             Crafting India&apos;s finest spice blends with generations of expertise.
@@ -93,6 +100,7 @@ export default function Footer() {
               <PhoneIcon className="w-4 h-4 text-amber-500 shrink-0" />
               <a
                 href={`tel:+${WHATSAPP_NUMBER}`}
+                onClick={() => trackEvent('contact_click', { method: 'phone', location: 'footer' })}
                 className="hover:text-amber-400 transition-colors"
               >
                 +{WHATSAPP_NUMBER}
@@ -102,6 +110,7 @@ export default function Footer() {
               <EnvelopeIcon className="w-4 h-4 text-amber-500 shrink-0" />
               <a
                 href={`mailto:${BUSINESS_INFO.email}`}
+                onClick={() => trackEvent('contact_click', { method: 'email', location: 'footer' })}
                 className="hover:text-amber-400 transition-colors"
               >
                 {BUSINESS_INFO.email}
@@ -113,6 +122,7 @@ export default function Footer() {
                 href={buildWhatsAppChatUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackEvent('whatsapp_click', { location: 'footer' })}
                 className="hover:text-amber-400 transition-colors"
               >
                 Chat on WhatsApp
@@ -146,7 +156,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-stone-700 py-5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-stone-500">
-          <span>© {year} RA A1 Masale. All rights reserved.</span>
+          <span>© {year} RA A1 Enterprises. All rights reserved.</span>
           <span>Made with ❤️ for authentic Indian flavours.</span>
         </div>
       </div>

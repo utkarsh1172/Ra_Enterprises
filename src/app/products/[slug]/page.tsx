@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { getAllProducts, getProductBySlug, getCategoryLabels, getProductsByCategory } from '@/data/products';
 import AddToCartSection from '@/components/products/AddToCartSection';
 import ProductCard from '@/components/products/ProductCard';
+import ProductViewTracker from '@/components/products/ProductViewTracker';
 import { CheckIcon, ChevronRightIcon } from '@/components/layout/Icons';
 
 interface Props {
@@ -40,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     keywords: product.seoKeywords,
     alternates: { canonical: canonicalPath },
     openGraph: {
-      title: `${title} | RA A1 Masale`,
+      title: `${title} | RA A1 Enterprises`,
       description,
       images: [{ url: product.ogImage || product.image }],
     },
@@ -68,7 +69,7 @@ export default async function ProductDetailPage({ params }: Props) {
     image: [`${SITE_URL}${product.image}`],
     description: product.description,
     sku: product.sku,
-    brand: { '@type': 'Brand', name: 'RA A1 Masale' },
+    brand: { '@type': 'Brand', name: 'RA A1 Enterprises' },
     offers: {
       '@type': 'Offer',
       priceCurrency: 'INR',
@@ -95,6 +96,7 @@ export default async function ProductDetailPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-[#faf9f6]">
+      <ProductViewTracker id={product.id} name={product.name} />
       {/* Structured data */}
       <script
         type="application/ld+json"

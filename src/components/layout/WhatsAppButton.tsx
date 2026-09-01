@@ -4,6 +4,7 @@
 
 import { WhatsAppIcon } from './Icons';
 import { buildWhatsAppChatUrl } from '@/utils/whatsapp';
+import { trackEvent } from '@/lib/analytics';
 
 export default function WhatsAppButton() {
   return (
@@ -11,6 +12,7 @@ export default function WhatsAppButton() {
       href={buildWhatsAppChatUrl()}
       target="_blank"
       rel="noopener noreferrer"
+      onClick={() => trackEvent('whatsapp_click', { location: 'floating_button' })}
       aria-label="Chat with us on WhatsApp"
       className="
         fixed bottom-6 right-6 z-50

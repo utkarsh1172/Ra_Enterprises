@@ -35,9 +35,9 @@ export default function IntroSection() {
         </Reveal>
 
         <Reveal x={24} y={0} delay={0.1} className="order-1 lg:order-2">
-          <SectionTitle label="Our story" title="Made with a pinch of tradition." centered={false} />
+          <SectionTitle label="Our story" title="The Taste of Authentic India" centered={false} />
           <p className="max-w-xl text-base leading-7 text-stone-600">
-            At RA A1 Masale, we believe the smallest ingredients make the biggest difference. We source thoughtfully, roast with care and blend with the patience great food deserves.
+            RA A1 Enterprises is built around one idea: quality spices and masalas that bring authentic flavour, aroma and richness to everyday cooking. We source thoughtfully, roast with care and blend with the patience great food deserves.
           </p>
           <p className="mt-4 max-w-xl text-base leading-7 text-stone-600">
             Every spoonful is designed to bring a little more depth, warmth and unmistakable Indian character to the meals you already love.

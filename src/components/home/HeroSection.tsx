@@ -3,8 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
-import { ArrowRightIcon, WhatsAppIcon } from '@/components/layout/Icons';
-import { buildWhatsAppChatUrl } from '@/utils/whatsapp';
+import { ArrowRightIcon } from '@/components/layout/Icons';
+import { trackEvent } from '@/lib/analytics';
+
+const floatingSpices = [
+  { src: '/images/cardamon-removebg-preview.png', top: '14%', left: '6%', size: 46, delay: 0 },
+  { src: '/images/anise-stars-removebg-preview.png', top: '68%', left: '10%', size: 40, delay: 0.6 },
+  { src: '/images/blackpapercorns-removebg-preview.png', top: '24%', left: '46%', size: 34, delay: 1.1 },
+  { src: '/images/cuminseed-removebg-preview.png', top: '78%', left: '42%', size: 38, delay: 1.6 },
+];
 
 const proof = [
   { value: '100%', text: 'natural ingredients' },
@@ -35,7 +42,7 @@ export default function HeroSection() {
       >
         <Image
           src="/images/whole-spice-selection.jpeg"
-          alt="RA A1 Masale whole spices arranged for traditional masala preparation"
+          alt="RA A1 Enterprises whole spices arranged for traditional masala preparation"
           fill
           priority
           className="object-cover object-[62%_center]"
@@ -43,6 +50,27 @@ export default function HeroSection() {
       </motion.div>
       <div className="absolute inset-0 bg-gradient-to-r from-[#241009] via-[#241009]/90 to-[#241009]/20" />
       <div className="grain absolute inset-0 opacity-20 mix-blend-soft-light" />
+
+      {/* Subtle floating spice particles */}
+      {!reduceMotion && (
+        <div className="pointer-events-none absolute inset-0 z-[1] hidden opacity-70 sm:block">
+          {floatingSpices.map((s) => (
+            <motion.div
+              key={s.src}
+              className="absolute"
+              style={{ top: s.top, left: s.left, width: s.size, height: s.size }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 0.85, y: [10, -14, 10] }}
+              transition={{
+                opacity: { duration: 1, delay: s.delay },
+                y: { duration: 6 + s.delay, repeat: Infinity, ease: 'easeInOut', delay: s.delay },
+              }}
+            >
+              <Image src={s.src} alt="" fill sizes="60px" className="object-contain drop-shadow-lg" />
+            </motion.div>
+          ))}
+        </div>
+      )}
 
       <motion.div
         variants={reduceMotion ? undefined : container}
@@ -63,34 +91,34 @@ export default function HeroSection() {
             variants={rise}
             className="max-w-3xl font-hero text-hero"
           >
-            Let every meal
-            <span className="block text-[#ffc45b]">taste like home.</span>
+            RA A1 Enterprises
+            <span className="block text-[#ffc45b]">Authentic Taste. Pure Spices.</span>
           </motion.h1>
 
           <motion.p
             variants={rise}
             className="mt-7 max-w-xl text-body-lg text-stone-200"
           >
-            Bold, fragrant masalas made with whole spices, time-honoured recipes and zero shortcuts. Bring the real flavour of India to your everyday kitchen.
+            Bringing the richness, aroma and authentic taste of Indian spices to every kitchen — bold, fragrant masalas made with whole spices, time-honoured recipes and zero shortcuts.
           </motion.p>
 
           <motion.div variants={rise} className="mt-9 flex flex-wrap gap-3">
             <Link
               href="/products"
+              onClick={() => trackEvent('explore_products_click', { location: 'hero' })}
               className="group inline-flex items-center gap-2 rounded-full bg-[#f5a831] px-6 py-3.5 text-sm font-bold text-[#38170e] shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5 hover:bg-[#ffc45b]"
             >
-              Shop the collection
+              Explore Our Masalas
               <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
-            <a
-              href={buildWhatsAppChatUrl('Hello! I would like to know more about your spices.')}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
+              onClick={() => trackEvent('contact_click', { location: 'hero' })}
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3.5 text-sm font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
             >
-              <WhatsAppIcon className="h-5 w-5" />
-              Order on WhatsApp
-            </a>
+              Contact Us
+              <ArrowRightIcon className="h-4 w-4" />
+            </Link>
           </motion.div>
 
           <motion.div

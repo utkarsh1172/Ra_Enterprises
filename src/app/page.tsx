@@ -3,8 +3,11 @@
 import HeroSection from '@/components/home/HeroSection';
 import IntroSection from '@/components/home/IntroSection';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
+import WhyChooseUs from '@/components/home/WhyChooseUs';
+import SpiceExperience from '@/components/home/SpiceExperience';
 import JourneyPreview from '@/components/home/JourneyPreview';
 import TestimonialsSection from '@/components/home/TestimonialsSection';
+import HomeContact from '@/components/home/HomeContact';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
@@ -13,7 +16,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 const websiteJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'RA A1 Masale',
+  name: 'RA A1 Enterprises',
   url: SITE_URL,
 };
 
@@ -27,8 +30,11 @@ export default function HomePage() {
       <HeroSection />
       <IntroSection />
       <FeaturedProducts />
+      <WhyChooseUs />
+      <SpiceExperience />
       <JourneyPreview />
       <TestimonialsSection />
+      <HomeContact />
     </>
   );
 }

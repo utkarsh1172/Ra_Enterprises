@@ -1,4 +1,4 @@
-// ── RA A1 Masale brand mark ───────────────────────────────────
+// ── RA A1 Enterprises brand mark ───────────────────────────────────
 // A single glossy red chili on the brand's maroon medallion,
 // with the site's existing ✦ accent motif, so the wordmark and
 // the mark share one visual language.
@@ -18,7 +18,7 @@ export function LogoMark({ size = 40, className = '' }: LogoMarkProps) {
       height={size}
       viewBox="0 0 100 100"
       role="img"
-      aria-label="RA A1 Masale"
+      aria-label="RA A1 Enterprises"
       className={className}
     >
       <defs>
@@ -88,9 +88,9 @@ export default function Logo({ size = 40, showTagline = true, dark = false, clas
     <span className={`flex items-center gap-3 ${className}`}>
       <LogoMark size={size} className="shrink-0" />
       <span className="leading-tight">
-        <span className={`block font-serif text-h4 ${nameColor}`}>RA A1 Masale</span>
+        <span className={`block font-serif text-h4 ${nameColor}`}>RA A1 Enterprises</span>
         {showTagline && (
-          <span className={`block text-caption uppercase ${taglineColor}`}>Crafted Masalas</span>
+          <span className={`block text-caption uppercase ${taglineColor}`}>Masale / Spices</span>
         )}
       </span>
     </span>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================================
-   RA A1 Masale — Centralized Typography System
+   RA A1 Enterprises — Centralized Typography System
    Fraunces (editorial serif) = brand/heading voice
    Manrope (humanist sans)    = UI/body/price voice
    One deliberate scale, reused everywhere via `text-*` utilities
@@ -107,7 +107,7 @@
   --text-caption--font-weight: 600;
 }
 
-/* ── RA A1 Masale – Custom Global Styles ───────────────── */
+/* ── RA A1 Enterprises – Custom Global Styles ───────────────── */
 
 @layer base {
   html {

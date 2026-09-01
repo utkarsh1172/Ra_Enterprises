@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Product } from '@/types';
 import { useCart } from '@/context/CartContext';
 import { ShoppingCartIcon } from '@/components/layout/Icons';
+import { trackEvent } from '@/lib/analytics';
 
 interface ProductCardProps { product: Product; }
 
@@ -23,7 +24,11 @@ export default function ProductCard({ product }: ProductCardProps) {
   }
 
   return (
-    <Link href={`/products/${product.slug}`} className="group flex flex-col overflow-hidden rounded-[1.4rem] border border-[#542315]/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-950/10">
+    <Link
+      href={`/products/${product.slug}`}
+      onClick={() => trackEvent('product_click', { product_id: product.id, product_name: product.name })}
+      className="group flex flex-col overflow-hidden rounded-[1.4rem] border border-[#542315]/10 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-950/10"
+    >
       <div className="relative aspect-[1.08/1] overflow-hidden bg-[#4a1f13] text-[#fff4d7]">
         <Image src={product.image} alt={product.name} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#291008]/90 via-[#291008]/20 to-transparent" />

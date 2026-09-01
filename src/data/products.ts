@@ -1,5 +1,5 @@
 // ============================================================
-// RA A1 Masale – Product Catalog data access
+// RA A1 Enterprises – Product Catalog data access
 // ============================================================
 // Thin async wrapper around the JSON-backed repository layer so
 // existing call sites keep the same function names. Server-only

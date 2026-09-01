@@ -31,10 +31,10 @@ export default function Header() {
             <LogoMark size={44} className="shrink-0 drop-shadow-sm transition-transform group-hover:-rotate-3" />
             <div className="leading-tight">
               <span className="block font-serif text-h4 text-[#542315]">
-                RA A1 Masale
+                RA A1 Enterprises
               </span>
               <span className="block text-caption uppercase text-[#b15a2a]">
-                Crafted Masalas
+                Masale / Spices
               </span>
             </div>
           </Link>

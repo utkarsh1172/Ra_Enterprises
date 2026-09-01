@@ -7,7 +7,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Our Process – How We Make Masalas',
   description:
-    'Discover the traditional process behind RA A1 Masale spices — from farm sourcing and sun-drying to stone grinding and quality packaging.',
+    'Discover the traditional process behind RA A1 Enterprises spices — from farm sourcing and sun-drying to stone grinding and quality packaging.',
   alternates: { canonical: '/journey' },
 };
 
@@ -107,7 +107,7 @@ export default function JourneyPage() {
             <div className="h-px w-12 bg-amber-500" />
           </div>
           <p className="mt-5 text-amber-200 max-w-2xl mx-auto text-base leading-relaxed">
-            Every packet of RA A1 Masale masala is the result of a meticulous, six-step
+            Every packet of RA A1 Enterprises masala is the result of a meticulous, six-step
             journey guided by tradition, care, and an obsession with quality.
           </p>
         </div>

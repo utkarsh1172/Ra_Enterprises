@@ -49,7 +49,7 @@ export default function TestimonialsSection() {
           <SectionTitle
             label="What Our Customers Say"
             title="Loved Across India"
-            subtitle="Real reviews from families who trust RA A1 Masale every day."
+            subtitle="Real reviews from families who trust RA A1 Enterprises every day."
           />
         </Reveal>
 
