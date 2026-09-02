@@ -4,14 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, useReducedMotion, type Variants } from 'framer-motion';
 import { ArrowRightIcon } from '@/components/layout/Icons';
+import SpiceBlendStage from '@/components/home/hero/SpiceBlendStage';
 import { trackEvent } from '@/lib/analytics';
-
-const floatingSpices = [
-  { src: '/images/cardamon-removebg-preview.png', top: '14%', left: '6%', size: 46, delay: 0 },
-  { src: '/images/anise-stars-removebg-preview.png', top: '68%', left: '10%', size: 40, delay: 0.6 },
-  { src: '/images/blackpapercorns-removebg-preview.png', top: '24%', left: '46%', size: 34, delay: 1.1 },
-  { src: '/images/cuminseed-removebg-preview.png', top: '78%', left: '42%', size: 38, delay: 1.6 },
-];
 
 const proof = [
   { value: '100%', text: 'natural ingredients' },
@@ -51,26 +45,8 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-[#241009] via-[#241009]/90 to-[#241009]/20" />
       <div className="grain absolute inset-0 opacity-20 mix-blend-soft-light" />
 
-      {/* Subtle floating spice particles */}
-      {!reduceMotion && (
-        <div className="pointer-events-none absolute inset-0 z-[1] hidden opacity-70 sm:block">
-          {floatingSpices.map((s) => (
-            <motion.div
-              key={s.src}
-              className="absolute"
-              style={{ top: s.top, left: s.left, width: s.size, height: s.size }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 0.85, y: [10, -14, 10] }}
-              transition={{
-                opacity: { duration: 1, delay: s.delay },
-                y: { duration: 6 + s.delay, repeat: Infinity, ease: 'easeInOut', delay: s.delay },
-              }}
-            >
-              <Image src={s.src} alt="" fill sizes="60px" className="object-contain drop-shadow-lg" />
-            </motion.div>
-          ))}
-        </div>
-      )}
+      {/* Spices enter from every edge, swirl, blend into one masala, then settle */}
+      <SpiceBlendStage />
 
       <motion.div
         variants={reduceMotion ? undefined : container}

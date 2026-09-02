@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# ...except the secret-free template, which is meant to be shared
+!.env.example
 
 # vercel
 .vercel

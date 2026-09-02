@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { listActiveProducts } from '@/lib/db/productRepository';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+import { SITE_URL } from '@/lib/siteUrl';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const products = await listActiveProducts();

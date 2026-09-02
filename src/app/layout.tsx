@@ -7,9 +7,10 @@ import WhatsAppButton from '@/components/layout/WhatsAppButton';
 import { CartProvider } from '@/context/CartContext';
 import Loader from '@/components/loader/Loader';
 import Analytics from '@/components/analytics/Analytics';
+import { SITE_URL } from '@/lib/siteUrl';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'RA A1 Enterprises Masale – Authentic Taste. Pure Spices.',
     template: '%s | RA A1 Enterprises Masale',
@@ -70,8 +71,6 @@ const yesevaOne = Yeseva_One({
   variable: '--font-hero',
   weight: '400',
 });
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
