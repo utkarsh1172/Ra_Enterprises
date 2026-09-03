@@ -1,12 +1,18 @@
 'use client';
 
 // ── Contact form (client-side WhatsApp handoff) ─────────────────
+// Visual shell follows the cream/dark-brown/gold system; the
+// submit behaviour (pre-filled WhatsApp message) is unchanged.
 
 import { useState } from 'react';
-import { WhatsAppIcon } from '@/components/layout/Icons';
+import { ArrowRightIcon, CheckIcon, WhatsAppIcon } from '@/components/layout/Icons';
 import { WHATSAPP_NUMBER } from '@/utils/whatsapp';
-import Button from '@/components/ui/Button';
 import { trackEvent } from '@/lib/analytics';
+
+const fieldClass =
+  'w-full rounded-lg border border-[#e6c990] bg-white px-4 py-3 text-input text-[#3d2015] placeholder:text-[#a98d76] outline-none transition focus:border-[#b15a2a] focus:ring-2 focus:ring-[#f5a831]/25';
+
+const labelClass = 'mb-1.5 block text-label text-[#4b3329]';
 
 export default function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
@@ -34,31 +40,29 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-md border border-amber-100 p-8">
-      <h2 className="font-serif text-h3 text-stone-800 mb-6">
-        Send Us a Message
-      </h2>
+    <div className="rounded-lg border border-[#ead8b6] bg-[#fffaf0] p-6 shadow-xl shadow-amber-950/10 sm:p-8">
+      <h2 className="font-serif text-h3 text-[#542315]">Send Us a Message</h2>
 
       {submitted ? (
-        <div className="text-center py-12">
-          <span className="text-5xl block mb-4">✅</span>
-          <h3 className="text-xl font-bold text-green-700 mb-2">Message Sent!</h3>
-          <p className="text-gray-600 text-sm">
-            We&apos;ve opened WhatsApp with your message. We&apos;ll get back to you shortly!
+        <div className="py-10 text-center">
+          <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#f5a831] text-[#321208]">
+            <CheckIcon className="h-7 w-7" />
+          </span>
+          <h3 className="mt-5 font-serif text-h4 text-[#542315]">Message Sent</h3>
+          <p className="mx-auto mt-2 max-w-sm text-small leading-relaxed text-[#6f5a4c]">
+            We&apos;ve opened WhatsApp with your message. We&apos;ll get back to you shortly.
           </p>
           <button
             onClick={() => setSubmitted(false)}
-            className="mt-6 text-amber-700 text-sm font-medium hover:text-amber-900 transition-colors cursor-pointer"
+            className="mt-6 text-sm font-bold text-[#8d301d] transition-colors hover:text-[#542315]"
           >
             Send another message
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
           <div>
-            <label className="block text-label text-gray-700 mb-1" htmlFor="name">
-              Your Name *
-            </label>
+            <label className={labelClass} htmlFor="name">Your Name *</label>
             <input
               id="name"
               name="name"
@@ -67,15 +71,13 @@ export default function ContactForm() {
               value={form.name}
               onChange={handleChange}
               placeholder="e.g. Rahul Sharma"
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
+              className={fieldClass}
             />
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid gap-5 sm:grid-cols-2">
             <div>
-              <label className="block text-label text-gray-700 mb-1" htmlFor="email">
-                Email
-              </label>
+              <label className={labelClass} htmlFor="email">Email *</label>
               <input
                 id="email"
                 name="email"
@@ -83,13 +85,11 @@ export default function ContactForm() {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
+                className={fieldClass}
               />
             </div>
             <div>
-              <label className="block text-label text-gray-700 mb-1" htmlFor="phone">
-                Phone / WhatsApp
-              </label>
+              <label className={labelClass} htmlFor="phone">Phone / WhatsApp</label>
               <input
                 id="phone"
                 name="phone"
@@ -97,15 +97,13 @@ export default function ContactForm() {
                 value={form.phone}
                 onChange={handleChange}
                 placeholder="+91 98765 43210"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition"
+                className={fieldClass}
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-label text-gray-700 mb-1" htmlFor="message">
-              Message *
-            </label>
+            <label className={labelClass} htmlFor="message">Message *</label>
             <textarea
               id="message"
               name="message"
@@ -113,16 +111,21 @@ export default function ContactForm() {
               rows={5}
               value={form.message}
               onChange={handleChange}
-              placeholder="Tell us about your order or inquiry..."
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-input focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-100 transition resize-none"
+              placeholder="Tell us about your inquiry..."
+              className={`${fieldClass} resize-none`}
             />
           </div>
 
-          <Button type="submit" variant="whatsapp" size="lg" fullWidth>
-            <WhatsAppIcon className="w-5 h-5" />
-            Send via WhatsApp
-          </Button>
-          <p className="text-xs text-gray-400 text-center">
+          <button
+            type="submit"
+            className="group flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-[#542315] px-6 py-3 text-button text-[#fff8ea] shadow-lg shadow-amber-950/15 transition-all hover:-translate-y-0.5 hover:bg-[#7b2a18]"
+          >
+            Send Message
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </button>
+
+          <p className="flex items-center justify-center gap-1.5 text-center text-xs font-semibold text-[#8a7261]">
+            <WhatsAppIcon className="h-3.5 w-3.5 text-[#16a34a]" />
             Submitting opens WhatsApp with your message pre-filled.
           </p>
         </form>

@@ -86,6 +86,7 @@ export interface CartState {
 }
 
 export type CartAction =
+  | { type: 'HYDRATE'; payload: CartState }
   | { type: 'ADD_ITEM'; payload: { product: Product; quantity: number; selectedSize: ProductSize } }
   | { type: 'REMOVE_ITEM'; payload: { productId: string; sizeLabel: string } }
   | { type: 'UPDATE_QUANTITY'; payload: { productId: string; sizeLabel: string; quantity: number } }

@@ -14,15 +14,15 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    'bg-amber-600 hover:bg-amber-700 text-white shadow-md hover:shadow-lg',
+    'bg-[#f5a831] text-[#321208] shadow-md shadow-amber-950/10 hover:bg-[#ffc45b] hover:shadow-lg',
   secondary:
-    'bg-red-700 hover:bg-red-800 text-white shadow-md hover:shadow-lg',
+    'bg-[#542315] text-[#fff8ea] shadow-md shadow-amber-950/10 hover:bg-[#7b2a18] hover:shadow-lg',
   outline:
-    'border-2 border-amber-600 text-amber-700 hover:bg-amber-600 hover:text-white',
+    'border border-[#7b2a18]/35 bg-transparent text-[#542315] hover:border-[#7b2a18] hover:bg-[#fff1d0]',
   ghost:
-    'text-amber-700 hover:bg-amber-50',
+    'text-[#7b2a18] hover:bg-[#fff1d0]',
   whatsapp:
-    'bg-green-500 hover:bg-green-600 text-white shadow-md hover:shadow-lg',
+    'bg-[#16a34a] text-white shadow-md hover:bg-[#12803b] hover:shadow-lg',
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -42,7 +42,7 @@ export default function Button({
   return (
     <button
       className={`
-        inline-flex items-center justify-center gap-2 font-semibold rounded-full
+        inline-flex items-center justify-center gap-2 rounded-full font-semibold
         transition-all duration-200 cursor-pointer
         disabled:opacity-50 disabled:cursor-not-allowed
         ${variantClasses[variant]}

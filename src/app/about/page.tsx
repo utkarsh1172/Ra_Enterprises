@@ -1,9 +1,9 @@
 // ── About Us Page ─────────────────────────────────────────────
 
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import SectionTitle from '@/components/ui/SectionTitle';
-import { CheckIcon } from '@/components/layout/Icons';
+import Image from 'next/image';
+import { HomeIcon, LeafIcon, ShieldCheckIcon, SparklesIcon } from '@/components/layout/Icons';
+import Reveal from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'About Us',
@@ -13,190 +13,86 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  {
-    icon: '🌿',
-    title: 'Purity First',
-    desc: 'No artificial colours, flavours, or preservatives — ever. What you taste is exactly what nature intended.',
-  },
-  {
-    icon: '🏔️',
-    title: 'Farm-Sourced',
-    desc: 'We partner directly with certified spice farmers from Maharashtra, Kerala, Rajasthan, and Gujarat.',
-  },
-  {
-    icon: '🪨',
-    title: 'Traditional Process',
-    desc: 'Stone-grinding preserves volatile oils that machine-grinding destroys — giving our masalas their signature depth.',
-  },
-  {
-    icon: '❤️',
-    title: 'Made with Love',
-    desc: 'Every batch is checked by our founder personally before it leaves the facility.',
-  },
-];
-
-const milestones = [
-  { year: '2010', event: 'RA A1 Enterprises founded with a vision to preserve traditional spice blending.' },
-  { year: '2013', event: 'Launched our signature Ghati Masala, inspired by Sahyadri heritage.' },
-  { year: '2016', event: 'Introduced the beloved Malvani Masala for coastal cuisine lovers.' },
-  { year: '2019', event: 'Expanded product range to include premium pure spice powders.' },
-  { year: '2022', event: 'Reached 10,000+ happy households across Maharashtra.' },
-  { year: '2024', event: 'Went online to serve spice lovers across India.' },
+  { icon: SparklesIcon, title: 'Traditional recipes' },
+  { icon: LeafIcon, title: 'Quality ingredients' },
+  { icon: ShieldCheckIcon, title: 'Customer trust' },
+  { icon: HomeIcon, title: 'Growing community' },
 ];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#faf9f6]">
-      {/* Hero */}
-      <div className="relative bg-gradient-to-br from-amber-950 to-red-950 py-20 px-4 text-center overflow-hidden">
-        <div className="absolute inset-0 opacity-5 pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(circle, #f59e0b 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
-        <div className="relative z-10">
-          <span className="inline-block text-eyebrow uppercase text-amber-400 mb-3">
-            Our Story
-          </span>
-          <h1 className="font-serif text-h1 text-white">
-            About RA A1 Enterprises
+    <div className="min-h-screen bg-[#fff8ea]">
+      <section className="relative overflow-hidden bg-[#3a170d] px-4 py-20 text-center text-[#fff8ea] sm:px-6 lg:px-8">
+        <Image
+          src="/images/dried-red-chillies.jpeg"
+          alt="Baskets of sun-dried red chillies"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-85"
+        />
+        {/* Darkest through the middle so the headline stays legible while the
+            spice photography still reads at both edges. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#3a170d]/72 via-[#3a170d]/94 to-[#3a170d]/72" />
+        <div className="relative z-10 mx-auto max-w-3xl">
+          <span className="text-eyebrow uppercase text-[#ffc45b]">Our Story</span>
+          <h1 className="mt-4 font-serif text-h1">
+            Rooted in Tradition.
+            <span className="block">Made for Today.</span>
           </h1>
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <div className="h-px w-12 bg-amber-500" />
-            <span className="text-amber-500 text-lg">✦</span>
-            <div className="h-px w-12 bg-amber-500" />
-          </div>
-          <p className="mt-5 text-amber-200 max-w-2xl mx-auto text-base leading-relaxed">
-            Born from a passion for authentic flavour and a deep respect for India&apos;s
-            spice heritage — we are RA A1 Enterprises.
+          <p className="mx-auto mt-5 max-w-xl text-base leading-7 text-[#fce6c0]">
+            At RA A1 Enterprises, we believe in the power of pure spices to bring people
+            together through authentic taste.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Story section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
-          {/* Placeholder image */}
-          <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-gradient-to-br from-amber-100 to-orange-100 border border-amber-200 flex items-center justify-center shadow-xl">
-            {/*
-              Replace with founder / factory image:
-              <Image src="/images/about-founder.jpg" alt="Our Founder" fill className="object-cover" />
-            */}
-            <div className="text-center p-8">
-              <span className="text-7xl block mb-4">👨‍🍳</span>
-              <span className="text-amber-700 font-medium text-sm">
-                [ Add founder / factory photo here ]
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <SectionTitle
-              label="Who We Are"
-              title="Passion Meets Tradition"
-              centered={false}
+      <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14 lg:px-8">
+        <Reveal x={-18} y={0} className="relative">
+          <div className="relative min-h-[320px] overflow-hidden rounded-lg shadow-xl shadow-amber-950/10 sm:min-h-[400px]">
+            <Image
+              src="/images/licensed-image (3).jpeg"
+              alt="Bowls of ground spices, whole spices, cinnamon and star anise on dark wood"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
             />
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                RA A1 Enterprises was founded with a single, unwavering mission: to bring the
-                authentic taste of Indian spices to every kitchen — without compromise.
-              </p>
-              <p>
-                Growing up in the spice-rich belt of Maharashtra, our founder witnessed how
-                commercially produced masalas were stripping away the very essence that made
-                Indian food world-famous. Too much filler, too little soul.
-              </p>
-              <p>
-                We set out to change that. Starting small, blending by hand in our own kitchen,
-                we crafted our first batch of <strong className="text-amber-700">Ghati Masala</strong> —
-                a recipe handed down through generations, rooted in the Sahyadri mountains.
-              </p>
-              <p>
-                Word spread. Families came back for more. Today, RA A1 Enterprises serves
-                thousands of households, still following the same principles: pure ingredients,
-                traditional grinding, and honest blending.
-              </p>
-            </div>
-
-            <ul className="mt-6 space-y-2">
-              {[
-                '10+ years of expertise in spice blending',
-                'Direct farm partnerships for traceability',
-                'Small-batch production for freshness',
-                'Zero artificial additives — always',
-              ].map((point) => (
-                <li key={point} className="flex items-start gap-2 text-sm text-gray-700">
-                  <span className="mt-0.5 w-5 h-5 bg-amber-100 rounded-full flex items-center justify-center shrink-0">
-                    <CheckIcon className="w-3 h-3 text-amber-700" />
-                  </span>
-                  {point}
-                </li>
-              ))}
-            </ul>
           </div>
-        </div>
-      </div>
-
-      {/* Our Values */}
-      <div className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionTitle
-            label="What We Stand For"
-            title="Our Core Values"
-            subtitle="These principles guide every decision we make — from sourcing to packaging."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((v) => (
-              <div
-                key={v.title}
-                className="bg-amber-50 border border-amber-100 rounded-2xl p-6 text-center hover:shadow-md transition-shadow duration-200"
-              >
-                <div className="text-4xl mb-4">{v.icon}</div>
-                <h3 className="font-bold text-stone-800 mb-2">{v.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{v.desc}</p>
-              </div>
-            ))}
+          {/* Overlaps the image edge, as in the design reference. */}
+          <div className="absolute right-4 top-1/2 w-40 -translate-y-1/2 rounded-lg bg-white p-6 text-center shadow-2xl shadow-amber-950/25 sm:w-48 lg:-right-8">
+            <span className="block font-serif text-5xl font-bold leading-none text-[#542315]">10+</span>
+            <span className="mt-2.5 block font-serif text-xl font-bold leading-tight text-[#542315]">
+              Years of Flavour
+            </span>
           </div>
-        </div>
-      </div>
+        </Reveal>
 
-      {/* Timeline */}
-      <div className="py-16 max-w-4xl mx-auto px-4 sm:px-6">
-        <SectionTitle
-          label="Our Journey"
-          title="Milestones That Shaped Us"
-        />
-        <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-amber-200" />
+        <Reveal x={18} y={0} delay={0.1}>
+          <h2 className="font-serif text-h2 text-[#542315]">Our Journey</h2>
+          <div className="mt-5 space-y-4 text-body leading-7 text-[#6f5a4c]">
+            <p>
+              RA A1 Enterprises is built on a deep love for Indian spices and traditional
+              recipes. What started as a small initiative has grown into a trusted brand,
+              bringing authentic masalas to kitchens across India.
+            </p>
+            <p>
+              We source carefully, roast with patience and grind in small batches so every
+              pack carries the aroma, colour and warmth that home cooks expect from real masala.
+            </p>
+          </div>
 
-          <div className="space-y-8 pl-16">
-            {milestones.map((m) => (
-              <div key={m.year} className="relative">
-                {/* Dot */}
-                <div className="absolute -left-10 mt-1 w-4 h-4 rounded-full bg-amber-600 border-2 border-white shadow" />
-                <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">
-                  {m.year}
+          <div className="mt-9 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+            {values.map((value) => (
+              <div key={value.title} className="flex items-center gap-3">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#f5a831] text-[#38170e]">
+                  <value.icon className="h-5 w-5" />
                 </span>
-                <p className="text-gray-700 mt-1 text-sm leading-relaxed">{m.event}</p>
+                <span className="text-sm font-bold text-[#3d2015]">{value.title}</span>
               </div>
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* CTA */}
-      <div className="bg-amber-600 py-14 px-4 text-center">
-        <h2 className="text-2xl font-bold font-serif text-white mb-3">
-          Taste the Difference Today
-        </h2>
-        <p className="text-amber-100 mb-7 max-w-md mx-auto">
-          Join thousands of happy households who have made RA A1 Enterprises a part of their daily cooking.
-        </p>
-        <Link
-          href="/products"
-          className="inline-block bg-white text-amber-700 font-bold px-8 py-3 rounded-full hover:bg-amber-50 transition-colors shadow-md"
-        >
-          Shop Our Spices
-        </Link>
-      </div>
+        </Reveal>
+      </section>
     </div>
   );
 }

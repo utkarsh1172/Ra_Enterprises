@@ -56,7 +56,7 @@ export default function SpiceExperience() {
   }
 
   return (
-    <section className="overflow-hidden bg-[#f8efe0] py-24">
+    <section className="overflow-hidden bg-[#fffdf8] py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal>
           <SectionTitle
@@ -73,12 +73,11 @@ export default function SpiceExperience() {
           className="relative mx-auto min-h-[340px] max-w-4xl sm:min-h-[420px] lg:min-h-[480px]"
         >
           {/* Central statement card */}
-          <div className="relative z-10 mx-auto flex max-w-sm flex-col items-center rounded-[1.75rem] border border-[#542315]/10 bg-white/90 px-8 py-10 text-center shadow-2xl shadow-amber-950/10 backdrop-blur-sm">
-            <span className="text-3xl">✦</span>
-            <p className="mt-4 font-serif text-xl font-bold leading-snug text-[#542315]">
+          <div className="relative z-10 mx-auto flex max-w-sm flex-col items-center rounded-lg border border-[#ead8b6] bg-[#fffaf0]/95 px-8 py-10 text-center shadow-2xl shadow-amber-950/10 backdrop-blur-sm">
+            <p className="font-serif text-xl font-bold leading-snug text-[#542315]">
               Cardamom, cumin, black pepper, star anise, cinnamon &amp; ginger — hand-picked, then blended with care.
             </p>
-            <span className="mt-4 text-caption uppercase text-[#b15a2a]">No fillers. No shortcuts.</span>
+            <span className="mt-5 text-caption uppercase text-[#b15a2a]">No fillers. No shortcuts.</span>
           </div>
 
           {/* Desktop: mouse-parallax ingredients */}
@@ -97,7 +96,7 @@ export default function SpiceExperience() {
                 <div className="relative h-14 w-14 sm:h-16 sm:w-16">
                   <Image src={item.src} alt={item.label} fill sizes="70px" className="object-contain drop-shadow-md" />
                 </div>
-                <span className="text-center text-[11px] font-semibold uppercase tracking-wide text-[#8d301d]">
+                <span className="text-center text-[11px] font-bold uppercase tracking-wide text-[#8d301d]">
                   {item.label}
                 </span>
               </div>

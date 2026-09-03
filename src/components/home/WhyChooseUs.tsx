@@ -16,7 +16,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="bg-[#fffdf8] py-24">
+    <section className="bg-[#fffdf8] py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
         <Reveal>
           <SectionTitle
@@ -30,13 +30,13 @@ export default function WhyChooseUs() {
           {features.map((f) => (
             <div
               key={f.title}
-              className="group h-full rounded-2xl border border-[#542315]/10 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-amber-950/10"
+              className="group h-full rounded-lg border border-[#ead8b6] bg-[#fffaf0] p-7 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-[#b15a2a]/35 hover:shadow-xl hover:shadow-amber-950/10"
             >
-              <span className="grid h-12 w-12 place-items-center rounded-xl bg-[#f9e3bd] text-[#8d301d] transition-colors duration-300 group-hover:bg-[#f5a831] group-hover:text-white">
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-[#fff1d0] text-[#b15a2a] transition-colors duration-300 group-hover:bg-[#f5a831] group-hover:text-[#38170e]">
                 <f.icon className="h-6 w-6" />
               </span>
               <h3 className="mt-5 font-serif text-h4 text-[#3d2015]">{f.title}</h3>
-              <p className="mt-2 text-small leading-relaxed text-stone-500">{f.desc}</p>
+              <p className="mt-2 text-small leading-relaxed text-[#6f5a4c]">{f.desc}</p>
             </div>
           ))}
         </StaggerGrid>

@@ -1,4 +1,6 @@
-// ── Reusable decorative section heading ──────────────────────
+// ── Reusable section heading ─────────────────────────────────
+// Eyebrow + serif heading + supporting line, matching the
+// composition used across every page of the site.
 
 interface SectionTitleProps {
   label?: string;        // small top label (e.g. "Our Range")
@@ -15,35 +17,22 @@ export default function SectionTitle({
   centered = true,
   light = false,
 }: SectionTitleProps) {
-  const textColor = light ? 'text-[#fff3d8]' : 'text-[#542315]';
-  const subtitleColor = light ? 'text-amber-100/80' : 'text-stone-600';
+  const titleColor = light ? 'text-[#fff8ea]' : 'text-[#542315]';
+  const subtitleColor = light ? 'text-[#fce6c0]' : 'text-[#5f4a3e]';
   const labelColor = light ? 'text-[#ffc45b]' : 'text-[#b15a2a]';
-  const lineColor = light ? 'bg-[#ffc45b]' : 'bg-[#c95d2e]';
 
   return (
     <div className={`${centered ? 'text-center' : ''} mb-10`}>
       {label && (
-        <span
-          className={`mb-3 inline-block text-eyebrow uppercase ${labelColor}`}
-        >
+        <span className={`mb-3 inline-block text-eyebrow uppercase ${labelColor}`}>
           {label}
         </span>
       )}
-      <h2
-        className={`font-serif text-h2 ${textColor}`}
-      >
-        {title}
-      </h2>
 
-      {/* Decorative divider */}
-      <div className={`mt-5 flex items-center gap-3 ${centered ? 'justify-center' : ''}`}>
-        <div className={`h-px w-12 ${lineColor}`} />
-        <span className="text-amber-600 text-lg">✦</span>
-        <div className={`h-px w-12 ${lineColor}`} />
-      </div>
+      <h2 className={`font-serif text-h2 ${titleColor}`}>{title}</h2>
 
       {subtitle && (
-        <p className={`mt-5 max-w-2xl ${centered ? 'mx-auto' : ''} text-body-lg ${subtitleColor}`}>
+        <p className={`mt-4 max-w-2xl ${centered ? 'mx-auto' : ''} text-body-lg ${subtitleColor}`}>
           {subtitle}
         </p>
       )}

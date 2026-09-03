@@ -1,29 +1,41 @@
 'use client';
 
 // ── Cart & Checkout Page ─────────────────────────────────────
+// Cart state, quantity maths and the WhatsApp checkout handoff
+// are unchanged — only the presentation follows the new system.
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { buildWhatsAppOrderUrl } from '@/utils/whatsapp';
-import { TrashIcon, PlusIcon, MinusIcon, WhatsAppIcon, ShoppingCartIcon } from '@/components/layout/Icons';
+import {
+  TrashIcon,
+  PlusIcon,
+  MinusIcon,
+  WhatsAppIcon,
+  ShoppingCartIcon,
+  ArrowRightIcon,
+} from '@/components/layout/Icons';
 
 export default function CartPage() {
   const { cart, updateQuantity, removeFromCart, clearCart } = useCart();
 
   if (cart.items.length === 0) {
     return (
-      <div className="min-h-[70vh] flex flex-col items-center justify-center bg-[#faf9f6] px-4 text-center">
-        <span className="text-7xl mb-5">🛒</span>
-        <h2 className="text-2xl font-bold font-serif text-stone-800 mb-3">Your cart is empty</h2>
-        <p className="text-gray-500 mb-8">
-          Looks like you haven&apos;t added any spices yet.
+      <div className="flex min-h-[70vh] flex-col items-center justify-center bg-[#fff8ea] px-4 text-center">
+        <span className="grid h-20 w-20 place-items-center rounded-full border border-[#ead8b6] bg-[#fffaf0] text-[#b15a2a] shadow-sm">
+          <ShoppingCartIcon className="h-9 w-9" />
+        </span>
+        <h1 className="mt-6 font-serif text-h2 text-[#542315]">Your cart is empty</h1>
+        <p className="mt-3 max-w-sm text-body text-[#6f5a4c]">
+          Looks like you haven&apos;t added any masalas yet.
         </p>
         <Link
           href="/products"
-          className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 rounded-full transition-colors"
+          className="group mt-8 inline-flex items-center gap-2 rounded-lg bg-[#542315] px-7 py-3.5 text-button text-[#fff8ea] shadow-lg shadow-amber-950/15 transition-all hover:-translate-y-0.5 hover:bg-[#7b2a18]"
         >
           Browse Products
+          <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
     );
@@ -32,94 +44,108 @@ export default function CartPage() {
   const whatsappUrl = buildWhatsAppOrderUrl(cart.items);
 
   return (
-    <div className="min-h-screen bg-[#faf9f6]">
+    <div className="min-h-screen bg-[#fff8ea]">
       {/* Page header */}
-      <div className="bg-white border-b border-amber-100 py-6 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h1 className="text-2xl font-bold font-serif text-stone-800 flex items-center gap-3">
-            <ShoppingCartIcon className="w-6 h-6 text-amber-600" />
+      <div className="border-b border-[#ead8b6] bg-[#fffaf0] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <span className="text-eyebrow uppercase text-[#b15a2a]">Your Order</span>
+          <h1 className="mt-2 flex flex-wrap items-baseline gap-3 font-serif text-h2 text-[#542315]">
             Your Cart
-            <span className="text-base font-normal text-gray-500">
-              ({cart.totalItems} item{cart.totalItems !== 1 ? 's' : ''})
+            <span className="text-sm font-bold text-[#7b6658]">
+              {cart.totalItems} item{cart.totalItems !== 1 ? 's' : ''}
             </span>
           </h1>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 grid lg:grid-cols-3 gap-8 items-start">
+      <div className="mx-auto grid max-w-6xl items-start gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.55fr_1fr] lg:px-8">
 
         {/* Cart items */}
-        <div className="lg:col-span-2 space-y-4">
+        <div className="space-y-4">
           {cart.items.map((item) => {
             const key = `${item.product.id}-${item.selectedSize.label}`;
             return (
               <div
                 key={key}
-                className="bg-white rounded-2xl shadow-sm border border-amber-50 p-4 flex gap-4"
+                className="flex gap-4 rounded-lg border border-[#ead8b6] bg-[#fffaf0] p-4 shadow-sm transition-shadow hover:shadow-md"
               >
                 {/* Product image */}
-                <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden bg-amber-50 shrink-0 border border-amber-100">
+                <Link
+                  href={`/products/${item.product.slug}`}
+                  className="relative h-24 w-24 shrink-0 overflow-hidden rounded-lg border border-[#e6c990] bg-[#f5ead7] sm:h-28 sm:w-28"
+                >
                   <Image
                     src={item.product.image}
                     alt={item.product.name}
                     fill
-                    className="object-cover"
-                    onError={() => {}}
+                    sizes="112px"
+                    className="object-cover transition-transform duration-500 hover:scale-105"
                   />
-                  {/* Fallback */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <span className="text-3xl">🌶️</span>
-                  </div>
-                </div>
+                </Link>
 
                 {/* Info */}
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-stone-800 text-sm sm:text-base leading-snug">
-                    {item.product.name}
-                  </h3>
-                  <p className="text-xs text-gray-500 mt-0.5">{item.selectedSize.label}</p>
-                  <p className="text-amber-700 font-bold mt-1">
-                    ₹{item.selectedSize.price}
-                    <span className="text-xs text-gray-500 font-normal ml-1">
-                      / {item.selectedSize.label}
-                    </span>
-                  </p>
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <Link
+                        href={`/products/${item.product.slug}`}
+                        className="font-serif text-product-name text-[#3d2015] transition-colors hover:text-[#9d371f]"
+                      >
+                        {item.product.name}
+                      </Link>
+                      {item.product.nameHindi && (
+                        <p className="mt-0.5 text-small font-bold text-[#b15a2a]">
+                          {item.product.nameHindi}
+                        </p>
+                      )}
+                      <p className="mt-1.5 text-sm font-bold text-[#8d301d]">
+                        ₹{item.selectedSize.price}
+                        <span className="ml-1 text-xs font-semibold text-[#7b6658]">
+                          / {item.selectedSize.label}
+                        </span>
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => removeFromCart(item.product.id, item.selectedSize.label)}
+                      className="shrink-0 rounded-lg p-2 text-[#a98d76] transition-colors hover:bg-[#fbe3dc] hover:text-[#a3301b]"
+                      aria-label={`Remove ${item.product.name} from cart`}
+                    >
+                      <TrashIcon className="h-4 w-4" />
+                    </button>
+                  </div>
 
                   {/* Quantity controls */}
-                  <div className="flex items-center gap-2 mt-3">
-                    <button
-                      onClick={() =>
-                        updateQuantity(item.product.id, item.selectedSize.label, item.quantity - 1)
-                      }
-                      className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center hover:border-amber-400 transition-colors cursor-pointer"
-                    >
-                      <MinusIcon className="w-3 h-3 text-gray-600" />
-                    </button>
-                    <span className="w-8 text-center font-semibold text-sm">
-                      {item.quantity}
-                    </span>
-                    <button
-                      onClick={() =>
-                        updateQuantity(item.product.id, item.selectedSize.label, item.quantity + 1)
-                      }
-                      className="w-7 h-7 rounded-full border border-gray-200 flex items-center justify-center hover:border-amber-400 transition-colors cursor-pointer"
-                    >
-                      <PlusIcon className="w-3 h-3 text-gray-600" />
-                    </button>
-                    <span className="ml-2 text-sm font-bold text-stone-800">
-                      = ₹{item.selectedSize.price * item.quantity}
+                  <div className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-3">
+                    <div className="flex h-10 items-center gap-1 rounded-lg border border-[#e6c990] bg-white px-1.5">
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.product.id, item.selectedSize.label, item.quantity - 1)
+                        }
+                        className="grid h-7 w-7 place-items-center rounded-md text-[#542315] transition-colors hover:bg-[#fff1d0]"
+                        aria-label={`Decrease ${item.product.name} quantity`}
+                      >
+                        <MinusIcon className="h-3.5 w-3.5" />
+                      </button>
+                      <span className="w-8 text-center text-sm font-extrabold tabular-nums text-[#3d2015]">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() =>
+                          updateQuantity(item.product.id, item.selectedSize.label, item.quantity + 1)
+                        }
+                        className="grid h-7 w-7 place-items-center rounded-md text-[#542315] transition-colors hover:bg-[#fff1d0]"
+                        aria-label={`Increase ${item.product.name} quantity`}
+                      >
+                        <PlusIcon className="h-3.5 w-3.5" />
+                      </button>
+                    </div>
+
+                    <span className="text-price tabular-nums text-[#542315]">
+                      ₹{item.selectedSize.price * item.quantity}
                     </span>
                   </div>
                 </div>
-
-                {/* Remove */}
-                <button
-                  onClick={() => removeFromCart(item.product.id, item.selectedSize.label)}
-                  className="self-start p-2 rounded-lg hover:bg-red-50 text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
-                  aria-label="Remove item"
-                >
-                  <TrashIcon className="w-4 h-4" />
-                </button>
               </div>
             );
           })}
@@ -128,7 +154,7 @@ export default function CartPage() {
           <div className="text-right">
             <button
               onClick={clearCart}
-              className="text-sm text-gray-400 hover:text-red-500 transition-colors cursor-pointer"
+              className="text-sm font-bold text-[#a98d76] transition-colors hover:text-[#a3301b]"
             >
               Clear all items
             </button>
@@ -136,20 +162,20 @@ export default function CartPage() {
         </div>
 
         {/* Order summary */}
-        <div className="bg-white rounded-2xl shadow-md border border-amber-100 p-6 sticky top-24">
-          <h2 className="text-lg font-bold font-serif text-stone-800 mb-4">Order Summary</h2>
+        <div className="rounded-lg border border-[#ead8b6] bg-[#fffaf0] p-6 shadow-lg shadow-amber-950/5 lg:sticky lg:top-24">
+          <h2 className="font-serif text-h3 text-[#542315]">Order Summary</h2>
 
           {/* Line items */}
-          <div className="space-y-2 text-sm text-gray-600 border-b border-gray-100 pb-4 mb-4">
+          <div className="mt-5 space-y-2.5 border-b border-[#ead8b6] pb-5 text-sm text-[#6f5a4c]">
             {cart.items.map((item) => (
               <div
                 key={`${item.product.id}-${item.selectedSize.label}`}
-                className="flex justify-between"
+                className="flex justify-between gap-3"
               >
-                <span className="truncate max-w-[60%]">
+                <span className="min-w-0 truncate">
                   {item.product.name} ({item.selectedSize.label}) × {item.quantity}
                 </span>
-                <span className="font-medium text-stone-800 shrink-0 ml-2">
+                <span className="shrink-0 font-bold tabular-nums text-[#3d2015]">
                   ₹{item.selectedSize.price * item.quantity}
                 </span>
               </div>
@@ -157,9 +183,9 @@ export default function CartPage() {
           </div>
 
           {/* Total */}
-          <div className="flex justify-between items-center mb-6">
-            <span className="font-bold text-stone-800">Total</span>
-            <span className="text-2xl font-bold text-amber-700">₹{cart.totalPrice}</span>
+          <div className="mt-5 flex items-center justify-between">
+            <span className="text-label text-[#4b3329]">Total</span>
+            <span className="text-price-lg tabular-nums text-[#8d301d]">₹{cart.totalPrice}</span>
           </div>
 
           {/* WhatsApp checkout CTA */}
@@ -167,27 +193,19 @@ export default function CartPage() {
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="
-              flex items-center justify-center gap-3
-              bg-green-500 hover:bg-green-600
-              text-white font-bold text-base
-              py-4 px-6 rounded-full
-              shadow-md hover:shadow-lg
-              transition-all duration-200
-              w-full
-            "
+            className="mt-6 flex min-h-13 w-full items-center justify-center gap-2.5 rounded-lg bg-[#542315] px-6 py-3.5 text-button-lg text-[#fff8ea] shadow-lg shadow-amber-950/15 transition-all hover:-translate-y-0.5 hover:bg-[#7b2a18]"
           >
-            <WhatsAppIcon className="w-6 h-6" />
+            <WhatsAppIcon className="h-5 w-5" />
             Checkout via WhatsApp
           </a>
 
-          <p className="text-xs text-gray-400 text-center mt-3">
-            Clicking above will open WhatsApp with your order pre-filled.
+          <p className="mt-3 text-center text-xs font-semibold text-[#8a7261]">
+            Clicking above opens WhatsApp with your order pre-filled.
           </p>
 
           <Link
             href="/products"
-            className="block text-center text-sm text-amber-700 font-medium mt-4 hover:text-amber-900 transition-colors"
+            className="mt-5 block text-center text-sm font-bold text-[#8d301d] transition-colors hover:text-[#542315]"
           >
             ← Continue Shopping
           </Link>

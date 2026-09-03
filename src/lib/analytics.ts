@@ -12,7 +12,8 @@ type GtagEvent =
   | 'contact_click'
   | 'whatsapp_click'
   | 'enquiry_form_submit'
-  | 'explore_products_click';
+  | 'explore_products_click'
+  | 'view_products_click';
 
 declare global {
   interface Window {

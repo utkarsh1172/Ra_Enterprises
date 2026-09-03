@@ -1,62 +1,100 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import SectionTitle from '@/components/ui/SectionTitle';
-import { CheckIcon, SparklesIcon } from '@/components/layout/Icons';
+import { ArrowRightIcon, CheckIcon, FlameIcon, HomeIcon, SparklesIcon } from '@/components/layout/Icons';
 import Reveal from '@/components/motion/Reveal';
+import { getProductBySlug } from '@/data/products';
 
-const highlights = [
-  'Whole spices selected for aroma, colour and character',
-  'Slow-roasted and ground in fresh, small batches',
-  'No artificial colours, flavours or preservatives',
-  'Family recipes inspired by regional Indian kitchens',
+const flavourNotes = [
+  'Handpicked ingredients',
+  'Sun-dried for natural oils',
+  'Slow roasted for rich flavour',
+  'Ground in small batches',
+  'No artificial colours or additives',
 ];
 
-export default function IntroSection() {
+const badges = [
+  { icon: SparklesIcon, title: 'Traditional Blend' },
+  { icon: FlameIcon, title: 'Rich Aroma' },
+  { icon: HomeIcon, title: 'Homemade' },
+];
+
+export default async function IntroSection() {
+  const ghati = await getProductBySlug('ghati-masala');
+  const productName = ghati?.name ?? 'Ghati Masala';
+  const productImage = ghati?.image ?? '/images/hero-spice-box.png';
+  const startingSize = ghati?.availableSizes[0];
+  const productPrice = startingSize?.price ?? ghati?.price ?? 100;
+  const productUnit = startingSize?.label ?? ghati?.unit ?? '100g';
+  const productHref = `/products/${ghati?.slug ?? 'ghati-masala'}`;
+
   return (
-    <section className="bg-[#fffdf8] py-24">
-      <div className="mx-auto grid max-w-7xl items-center gap-16 px-5 sm:px-6 lg:grid-cols-2 lg:px-8">
-        <Reveal x={-24} y={0} className="relative order-2 lg:order-1">
-          <div className="relative aspect-[4/4.6] max-w-[500px] overflow-hidden rounded-[2rem] bg-[#4a1f13] shadow-2xl shadow-amber-950/15">
-            <Image src="/images/whole-spices-bowls.jpeg" alt="Whole spices prepared in traditional bowls" fill className="object-cover object-center" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#2d1008]/75 via-transparent to-transparent" />
-            <div className="absolute bottom-7 left-7 right-7 text-white">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffd187]">The RA standard</p>
-              <p className="mt-2 max-w-xs font-serif text-2xl font-bold leading-tight">Real flavour begins before the grind.</p>
-            </div>
+    <section id="bestseller" className="bg-[#fff8ea] py-20 sm:py-24">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-5 sm:px-6 lg:grid-cols-[0.95fr_0.92fr_0.85fr] lg:px-8">
+        <Reveal x={-18} y={0} className="order-1">
+          <span className="text-eyebrow uppercase text-[#b15a2a]">Our Bestseller</span>
+          <h2 className="mt-3 font-serif text-h1 text-[#542315]">{productName}</h2>
+          {ghati?.nameHindi && <p className="mt-1 text-sm font-bold text-[#b15a2a]">{ghati.nameHindi}</p>}
+          <p className="mt-5 max-w-md text-body text-[#5f4a3e]">
+            A perfectly balanced blend of traditional spices from the Sahyadri ghats. Earthy,
+            aromatic and full of authentic Indian flavour.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {badges.map((badge) => (
+              <span key={badge.title} className="inline-flex items-center gap-2 rounded-lg border border-[#7b2a18]/10 bg-white px-3 py-2 text-xs font-bold text-[#542315] shadow-sm">
+                <span className="grid h-7 w-7 place-items-center rounded-full bg-[#fff1d0] text-[#b15a2a]">
+                  <badge.icon className="h-4 w-4" />
+                </span>
+                {badge.title}
+              </span>
+            ))}
           </div>
-          <div className="absolute -right-4 top-10 rounded-2xl bg-[#f6ad39] p-4 text-[#542315] shadow-xl sm:-right-8">
-            <div className="font-serif text-3xl font-bold">10+</div>
-            <div className="mt-0.5 text-[10px] font-black uppercase tracking-[0.1em]">years of flavour</div>
-          </div>
-          <div className="absolute -bottom-6 -right-2 max-w-[215px] rounded-2xl border border-[#542315]/10 bg-white p-4 shadow-xl sm:-right-10">
-            <p className="font-serif text-lg font-bold text-[#542315]">No fillers. No fuss.</p>
-            <p className="mt-1 text-xs leading-relaxed text-stone-500">Just wonderfully aromatic spices that let your cooking shine.</p>
-          </div>
+          <Link
+            href={productHref}
+            className="group mt-7 inline-flex items-center gap-2 rounded-lg bg-[#542315] px-5 py-3 text-sm font-bold text-[#fff8ea] shadow-lg shadow-amber-950/10 transition-all hover:-translate-y-0.5 hover:bg-[#7b2a18]"
+          >
+            Shop Now
+            <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </Reveal>
 
-        <Reveal x={24} y={0} delay={0.1} className="order-1 lg:order-2">
-          <SectionTitle label="Our story" title="The Taste of Authentic India" centered={false} />
-          <p className="max-w-xl text-base leading-7 text-stone-600">
-            RA A1 Enterprises is built around one idea: quality spices and masalas that bring authentic flavour, aroma and richness to everyday cooking. We source thoughtfully, roast with care and blend with the patience great food deserves.
-          </p>
-          <p className="mt-4 max-w-xl text-base leading-7 text-stone-600">
-            Every spoonful is designed to bring a little more depth, warmth and unmistakable Indian character to the meals you already love.
-          </p>
-          <ul className="mt-8 space-y-3.5">
-            {highlights.map((highlight) => (
-              <li key={highlight} className="flex items-start gap-3 text-sm font-medium text-[#4b3329]">
-                <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#f9e3bd]">
-                  <CheckIcon className="h-3 w-3 text-[#9d371f]" />
-                </span>
-                {highlight}
-              </li>
-            ))}
-          </ul>
-          <Link href="/about" className="group mt-9 inline-flex items-center gap-2 text-sm font-bold text-[#8d301d] transition-colors hover:text-[#542315]">
-            <SparklesIcon className="h-5 w-5" />
-            Discover our craft
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </Link>
+        <Reveal delay={0.08} className="relative order-2 min-h-[430px] overflow-hidden rounded-lg border border-[#7b2a18]/10 bg-[#f5ead7] shadow-2xl shadow-amber-950/10">
+          <Image
+            src={productImage}
+            alt={`${productName} — traditional masala blend by RA A1 Enterprises`}
+            fill
+            className="object-cover object-center"
+            sizes="(min-width: 1024px) 33vw, 90vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#2a1008]/40 via-transparent to-transparent" />
+          <div className="absolute bottom-5 left-5 right-5 rounded-lg border border-white/30 bg-[#fff8ea]/92 p-4 text-[#542315] shadow-xl backdrop-blur">
+            <div className="flex items-end justify-between gap-3">
+              <div>
+                <span className="text-[0.68rem] font-black uppercase text-[#b15a2a]">Signature Blend</span>
+                <p className="mt-1 font-serif text-2xl font-bold">₹{productPrice}<span className="font-sans text-sm font-semibold text-[#7b6658]"> / {productUnit}</span></p>
+              </div>
+              <span className="grid h-16 w-16 place-items-center rounded-full border-4 border-[#fff8ea] bg-[#78a742] text-center text-[0.62rem] font-black uppercase leading-tight text-white shadow-lg">
+                100% Natural
+              </span>
+            </div>
+          </div>
+          <div className="absolute -left-8 bottom-10 h-36 w-36 rounded-full bg-[#f5a831]/35 blur-2xl" />
+        </Reveal>
+
+        <Reveal x={18} y={0} delay={0.14} className="order-3">
+          <div className="rounded-lg bg-[#4a1b0f] p-7 text-[#fff8ea] shadow-2xl shadow-amber-950/15">
+            <span className="text-eyebrow uppercase text-[#ffc45b]">The Taste</span>
+            <h3 className="mt-2 max-w-xs font-serif text-3xl font-bold leading-tight">The Taste of Real Spices</h3>
+            <ul className="mt-7 space-y-4">
+              {flavourNotes.map((note) => (
+                <li key={note} className="flex items-start gap-3 text-sm font-semibold text-[#fce6c0]">
+                  <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#f5a831] text-[#321208]">
+                    <CheckIcon className="h-3.5 w-3.5" />
+                  </span>
+                  {note}
+                </li>
+              ))}
+            </ul>
+          </div>
         </Reveal>
       </div>
     </section>

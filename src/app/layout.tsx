@@ -111,7 +111,11 @@ export default function RootLayout({
         {/* Cart state is available across all pages */}
         <CartProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          {/* overflow-x-clip contains the horizontal entry transforms used by
+              Reveal while a section is still below the fold. `clip` rather than
+              `hidden` so it never becomes a scroll container — sticky headers
+              and the sticky cart summary keep working. */}
+          <main className="flex-1 overflow-x-clip">{children}</main>
           <Footer />
           {/* Floating WhatsApp button on every page */}
           <WhatsAppButton />

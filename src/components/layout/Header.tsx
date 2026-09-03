@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCart } from '@/context/CartContext';
 import { ShoppingCartIcon, Bars3Icon, XMarkIcon } from './Icons';
@@ -20,20 +21,21 @@ const navLinks = [
 export default function Header() {
   const { cart } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-amber-950/10 bg-[#fffdf8]/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-[#542315]/10 bg-[#fffaf0]/95 shadow-sm shadow-amber-950/5 backdrop-blur-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-[72px] items-center justify-between">
 
           {/* Logo */}
-          <Link href="/" className="group flex shrink-0 items-center gap-3">
+          <Link href="/" className="group flex shrink-0 items-center gap-3" onClick={() => setMobileOpen(false)}>
             <LogoMark size={44} className="shrink-0 drop-shadow-sm transition-transform group-hover:-rotate-3" />
             <div className="leading-tight">
-              <span className="block font-serif text-h4 text-[#542315]">
+              <span className="block font-serif text-[1.05rem] font-bold leading-none text-[#542315] sm:text-h4">
                 RA A1 Enterprises
               </span>
-              <span className="block text-caption uppercase text-[#b15a2a]">
+              <span className="mt-1 block text-[0.66rem] font-extrabold uppercase leading-none text-[#b15a2a]">
                 Masale / Spices
               </span>
             </div>
@@ -45,7 +47,11 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-full px-4 py-2 text-nav text-stone-600 transition-colors hover:bg-orange-50 hover:text-[#8d301d]"
+                className={`rounded-lg px-3.5 py-2 text-[0.82rem] font-bold transition-colors ${
+                  pathname === link.href
+                    ? 'bg-[#fff1d0] text-[#7b2a18]'
+                    : 'text-[#4b3a31] hover:bg-[#fff1d0] hover:text-[#7b2a18]'
+                }`}
               >
                 {link.label}
               </Link>
@@ -54,10 +60,17 @@ export default function Header() {
 
           {/* Cart + Mobile Toggle */}
           <div className="flex items-center gap-3">
+            <Link
+              href="/contact"
+              className="hidden rounded-full bg-[#542315] px-5 py-2.5 text-[0.78rem] font-extrabold text-[#fff8ea] shadow-md shadow-amber-950/10 transition-all hover:-translate-y-0.5 hover:bg-[#7b2a18] sm:inline-flex"
+            >
+              Get a Quote
+            </Link>
+
             {/* Cart icon */}
             <Link
               href="/cart"
-              className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#542315] text-white shadow-lg shadow-amber-950/15 transition-transform hover:-translate-y-0.5"
+              className="relative flex h-10 w-10 items-center justify-center rounded-full bg-[#542315] text-[#fff8ea] shadow-lg shadow-amber-950/15 transition-transform hover:-translate-y-0.5 hover:bg-[#7b2a18]"
               aria-label="Shopping cart"
             >
               <ShoppingCartIcon className="h-5 w-5" />
@@ -69,7 +82,7 @@ export default function Header() {
                     animate={{ scale: 1, opacity: 1 }}
                     exit={{ scale: 0, opacity: 0 }}
                     transition={{ type: 'spring', stiffness: 500, damping: 20 }}
-                    className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"
+                    className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#f5a831] text-xs font-black text-[#321208]"
                   >
                     {cart.totalItems > 9 ? '9+' : cart.totalItems}
                   </motion.span>
@@ -86,9 +99,9 @@ export default function Header() {
               aria-controls="mobile-nav"
             >
               {mobileOpen ? (
-                <XMarkIcon className="w-6 h-6 text-[#542315]" />
+                <XMarkIcon className="h-6 w-6 text-[#542315]" />
               ) : (
-                <Bars3Icon className="w-6 h-6 text-[#542315]" />
+                <Bars3Icon className="h-6 w-6 text-[#542315]" />
               )}
             </button>
           </div>
@@ -97,18 +110,29 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {mobileOpen && (
-        <div id="mobile-nav" className="lg:hidden border-t border-amber-100 bg-[#fffdf8] shadow-lg">
+        <div id="mobile-nav" className="border-t border-[#542315]/10 bg-[#fffaf0] shadow-lg lg:hidden">
           <nav className="flex flex-col py-3 px-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-4 py-3 text-nav text-stone-700 hover:bg-amber-50 hover:text-amber-800 transition-colors"
+                className={`rounded-lg px-4 py-3 text-nav transition-colors ${
+                  pathname === link.href
+                    ? 'bg-[#fff1d0] text-[#7b2a18]'
+                    : 'text-stone-700 hover:bg-[#fff1d0] hover:text-[#7b2a18]'
+                }`}
               >
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/contact"
+              onClick={() => setMobileOpen(false)}
+              className="mt-2 rounded-full bg-[#542315] px-4 py-3 text-center text-sm font-bold text-[#fff8ea]"
+            >
+              Get a Quote
+            </Link>
           </nav>
         </div>
       )}

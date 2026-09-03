@@ -23,7 +23,7 @@ export default function SpiceBlendStage() {
   const spices = isMobile ? WHOLE_SPICES.filter((s) => s.onMobile) : WHOLE_SPICES;
 
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1] overflow-hidden">
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[3] overflow-hidden">
       <SpicePowderCanvas particleCount={particleCount} still={still} />
 
       <div className="absolute inset-0 hidden opacity-90 sm:block">

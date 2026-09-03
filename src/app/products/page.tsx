@@ -1,6 +1,7 @@
 // ── Products Catalog Page ─────────────────────────────────────
 
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { getAllProducts, getCategoryLabels } from '@/data/products';
 import ProductsFilterClient from '@/components/products/ProductsFilterClient';
 
@@ -39,7 +40,7 @@ export default async function ProductsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#faf9f6]">
+    <div className="min-h-screen bg-[#fff8ea]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
@@ -48,25 +49,27 @@ export default async function ProductsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      {/* Page header */}
-      <div className="bg-gradient-to-br from-amber-950 to-red-950 py-16 px-4 text-center">
-        <span className="inline-block text-eyebrow uppercase text-amber-400 mb-3">
-          Our Products
-        </span>
-        <h1 className="font-serif text-h1 text-white">
-          Spices &amp; Masalas
-        </h1>
-        <div className="flex items-center justify-center gap-3 mt-4">
-          <div className="h-px w-12 bg-amber-500" />
-          <span className="text-amber-500 text-lg">✦</span>
-          <div className="h-px w-12 bg-amber-500" />
+      <section className="relative overflow-hidden bg-[#3a170d] px-4 py-14 text-[#fff8ea] sm:px-6 lg:px-8">
+        <Image
+          src="/images/traditional-spice-prep.jpeg"
+          alt="Earthen bowls of whole Indian spices prepared for grinding"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center opacity-85"
+        />
+        {/* Keeps the headline side readable while the spice bowls stay visible on the right. */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#3a170d] via-[#3a170d]/88 to-[#3a170d]/35" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <span className="text-eyebrow uppercase text-[#ffc45b]">Our Range</span>
+          <h1 className="mt-3 font-serif text-h1">Our Spices &amp; Blends</h1>
+          <p className="mt-4 max-w-xl text-base leading-7 text-[#fce6c0]">
+            Explore our handcrafted masalas made with premium quality spices.
+          </p>
         </div>
-        <p className="mt-4 text-amber-200 max-w-xl mx-auto text-base">
-          Pure, natural, stone-ground — every product crafted with care and tradition.
-        </p>
-      </div>
+      </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <ProductsFilterClient products={products} categoryLabels={categoryLabels} />
       </div>
     </div>

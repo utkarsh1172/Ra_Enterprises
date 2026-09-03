@@ -12,6 +12,7 @@ import React, {
   useContext,
   useReducer,
   useEffect,
+  useRef,
   ReactNode,
 } from 'react';
 import { CartAction, CartItem, CartState, Product, ProductSize } from '@/types';
@@ -20,10 +21,14 @@ import { CartAction, CartItem, CartState, Product, ProductSize } from '@/types';
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
+    // Restores the persisted cart after mount. Reading localStorage during
+    // render instead would make the server (always empty) and the client
+    // disagree, which React reports as a hydration mismatch.
+    case 'HYDRATE':
+      return computeTotals({ ...state, items: action.payload.items });
+
     case 'ADD_ITEM': {
       const { product, quantity, selectedSize } = action.payload;
-      const key = `${product.id}-${selectedSize.label}`;
-
       const existing = state.items.find(
         (i) => i.product.id === product.id && i.selectedSize.label === selectedSize.label
       );
@@ -103,23 +108,34 @@ const CartContext = createContext<CartContextValue | undefined>(undefined);
 // ── Provider ─────────────────────────────────────────────────
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, dispatch] = useReducer(cartReducer, initialState, (init) => {
-    // Hydrate from localStorage on first render (client only)
-    if (typeof window === 'undefined') return init;
+  const [cart, dispatch] = useReducer(cartReducer, initialState);
+
+  // The very first persist pass runs before HYDRATE has been applied, so it
+  // would write the empty initial state over a stored cart. Skip just that one.
+  const skipFirstPersist = useRef(true);
+
+  // Read the persisted cart once, after mount, so the first client render
+  // matches the server-rendered HTML exactly.
+  useEffect(() => {
     try {
       const stored = localStorage.getItem('ra-cart');
       if (stored) {
         const parsed = JSON.parse(stored) as CartState;
-        return computeTotals(parsed);
+        if (Array.isArray(parsed?.items) && parsed.items.length > 0) {
+          dispatch({ type: 'HYDRATE', payload: parsed });
+        }
       }
     } catch {
       // ignore malformed data
     }
-    return init;
-  });
+  }, []);
 
   // Persist to localStorage on every change
   useEffect(() => {
+    if (skipFirstPersist.current) {
+      skipFirstPersist.current = false;
+      return;
+    }
     localStorage.setItem('ra-cart', JSON.stringify(cart));
   }, [cart]);
 
